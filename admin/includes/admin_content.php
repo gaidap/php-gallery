@@ -9,8 +9,10 @@
             </h1>
             <?php
                 $database = new Database();
-                $user_repository = new UserRepository($database->get_connection());
-                print_r($user_repository->list_users());
+                $user_repository = new UserRepository($database->getConnection());
+                foreach ($user_repository->listUsers() as $user) {
+                    echo $user . "\n";
+                }
             ?>
             <ol class="breadcrumb">
                 <li>
