@@ -74,3 +74,7 @@ fabric.properties
 
 # PHPUnit
 .phpunit.result.cache
+
+# Datasource configuration
+/.idea/dataSources.xml
+/.idea/sqldialects.xml
