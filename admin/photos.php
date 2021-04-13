@@ -1,9 +1,9 @@
-<?php include("includes/header.php"); ?>
+<?php require_once("includes/header.php"); ?>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <?php include("includes/top_nav.php") ?>
-    <?php include("includes/side_nav.php") ?>
+    <?php require_once("includes/top_nav.php") ?>
+    <?php require_once("includes/side_nav.php") ?>
 </nav>
 
 <div id="page-wrapper">
@@ -34,4 +34,4 @@
 </div>
 <!-- /#page-wrapper -->
 
-<?php include("includes/footer.php"); ?>
+<?php require_once("includes/footer.php"); ?>

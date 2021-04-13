@@ -32,6 +32,11 @@
             }
             return UserFactory::reconstituteUser($result->fetch_assoc());
         }
+    
+        function verifyUser(string $username, string $password): ?User {
+            $current_user = $this->findByUsername($username);
+            return $current_user && $current_user->checkPassword($password) ? $current_user : null;
+        }
         
         private function isResultEmpty(mysqli_result|bool $result): bool {
             return !$result || $result->num_rows === 0;

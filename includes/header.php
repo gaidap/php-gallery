@@ -31,7 +31,7 @@
 
 
     <!-- Navigation -->
-<?php include("navigation.php"); ?>
+<?php require_once("navigation.php"); ?>
 
     <!-- Page Content -->
     <div class="container">

@@ -45,6 +45,14 @@
             return $this;
         }
         
+        function getId(): int {
+            return $this->id;
+        }
+        
+        function getUsername(): string {
+            return $this->username;
+        }
+        
         function __toString(): string {
             return "ID: $this->id,
                     username: $this->username,
@@ -52,6 +60,5 @@
                     last: $this->last_name,
                     created: $this->creation_date";
         }
-        
-        
+    
     }
