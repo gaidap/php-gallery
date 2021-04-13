@@ -11,8 +11,11 @@
                 $database = new Database();
                 $user_repository = new UserRepository($database->getConnection());
                 foreach ($user_repository->listUsers() as $user) {
-                    echo $user . "\n";
+                    echo '<div>' . $user . '</div>';
                 }
+                echo '<div>' . $user_repository->findUserById(1) . '</div>';
+                echo '<div>' . $user_repository->findUserByUsername('gaidap') . '</div>';
+                echo '<div>' . $user_repository->findUserByUsername('gaidaps') . '</div>';
             ?>
             <ol class="breadcrumb">
                 <li>

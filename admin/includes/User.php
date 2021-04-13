@@ -44,8 +44,6 @@
             $this->creation_date = $creation_date;
             return $this;
         }
-        
-        
     
         function __toString(): string {
             return "ID: $this->id,
