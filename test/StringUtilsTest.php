@@ -1,6 +1,6 @@
 <?php
     
-    require_once "../admin/includes/StringUtils.php";
+    require_once "../admin/includes/util/StringUtils.php";
     
     use PHPUnit\Framework\TestCase;
     

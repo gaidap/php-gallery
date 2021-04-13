@@ -11,7 +11,7 @@
             return UserFactory::reconstituteUsers($result->fetch_all(MYSQLI_ASSOC));
         }
         
-        function findUserById($id): ?User {
+        function findById($id): ?User {
             $stmt = $this->prepareStatement('SELECT * FROM users WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute();
@@ -22,7 +22,7 @@
             return UserFactory::reconstituteUser($result->fetch_assoc());
         }
         
-        function findUserByUsername($username): ?User {
+        function findByUsername($username): ?User {
             $stmt = $this->prepareStatement('SELECT * FROM users WHERE username = ?');
             $stmt->bind_param('s', $username);
             $stmt->execute();

@@ -7,5 +7,8 @@ create table users
     password      varchar(255)                          not null,
     first_name    varchar(255)                          not null,
     last_name     varchar(255)                          not null,
-    creation_date timestamp default current_timestamp() not null
+    creation_date timestamp default current_timestamp() not null,
+    constraint users_username_uindex
+        unique (username)
 );
+

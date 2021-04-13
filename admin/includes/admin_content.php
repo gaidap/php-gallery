@@ -13,9 +13,8 @@
                 foreach ($user_repository->listUsers() as $user) {
                     echo '<div>' . $user . '</div>';
                 }
-                echo '<div>' . $user_repository->findUserById(1) . '</div>';
-                echo '<div>' . $user_repository->findUserByUsername('gaidap') . '</div>';
-                echo '<div>' . $user_repository->findUserByUsername('gaidaps') . '</div>';
+                echo '<div> User with ID 1: ' . $user_repository->findById(1) . '</div>';
+                echo '<div> User with username gaidap: ' . $user_repository->findByUsername('gaidap') . '</div>';
             ?>
             <ol class="breadcrumb">
                 <li>
