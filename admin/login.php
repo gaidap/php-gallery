@@ -6,7 +6,6 @@
     }
     
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    $error_message = "";
     if (isset($_POST['submit'])) {
         $database = new Database();
         $user_repo = new UserRepository($database->getConnection());
@@ -19,7 +18,7 @@
             );
             redirect("index.php");
         } else {
-            $error_message = "Invalid password or username";
+            setMessage("Invalid password or username");
         }
     } else {
         unset($post);
@@ -28,7 +27,7 @@
 
 <div class="col-md-4 col-md-offset-3">
 
-    <h4 class="bg-danger"><?php echo $error_message; ?></h4>
+    <h4 class="bg-danger"><?php echo showMessage(); ?></h4>
 
     <form id="login-id" action="" method="post">
 
