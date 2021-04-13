@@ -1,5 +1,6 @@
 <?php
     include("db_config.php");
+    include("StringUtils.php");
     include("Database.php");
     include("BaseRepository.php");
     include("UserRepository.php");

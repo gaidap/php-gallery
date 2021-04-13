@@ -14,27 +14,27 @@
             $this->id = $id;
             return $this;
         }
-    
+        
         function setUsername(string $username): User {
             $this->username = $username;
             return $this;
         }
-    
+        
         function checkPassword($password): bool {
             return $this->password === hash('sha256', $password);
         }
-    
+        
         function setPassword(string $password): User {
-            $this->password = hash('sha256', $password);
+            $this->password = !$this->id ? hash('sha256', $password) : $password;
             return $this;
         }
-    
+        
         function setFirstName(string $first_name): User {
             $this->first_name = $first_name;
             return $this;
             
         }
-    
+        
         function setLastName(string $last_name): User {
             $this->last_name = $last_name;
             return $this;
@@ -44,7 +44,7 @@
             $this->creation_date = $creation_date;
             return $this;
         }
-    
+        
         function __toString(): string {
             return "ID: $this->id,
                     username: $this->username,
@@ -52,6 +52,6 @@
                     last: $this->last_name,
                     created: $this->creation_date";
         }
-    
-    
+        
+        
     }
