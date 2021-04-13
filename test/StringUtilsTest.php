@@ -35,4 +35,16 @@
         public function testConvertPropertyToSetterReturnsJustSetIfPropertyIsNull() {
             self::assertEquals('set', StringUtils::convertPropertyToSetter(null));
         }
+        
+        public function testConvertPropertyToSetterReturnsSetterOfPropertyInCamelCase() {
+            self::assertEquals('setLifeOfBrian', StringUtils::convertPropertyToSetter('life_of_brian'));
+        }
+        
+        public function testConvertPropertyToSetterReturnsSetterOfPropertyInMixedForm() {
+            self::assertEquals('setLifeOfBrian', StringUtils::convertPropertyToSetter('life_ofBrian'));
+        }
+        
+        public function testConvertPropertyToSetterReturnsSetterOfPropertyInCamelCaseForm() {
+            self::assertEquals('setLifeOfBrian', StringUtils::convertPropertyToSetter('LifeOfBrian'));
+        }
     }
