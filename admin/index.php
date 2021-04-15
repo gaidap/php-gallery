@@ -1,11 +1,5 @@
 <?php require_once("includes/header.php"); ?>
 
-<?php
-    if(!$_SESSION['is_logged_in']) {
-        redirect("login.php");
-    }
-?>
-
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <?php require_once("includes/top_nav.php") ?>
