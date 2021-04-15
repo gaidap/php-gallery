@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <?php require_once("init.php"); ?>
 <?php
-    if(!str_contains($_SERVER['PHP_SELF'], "login.php") && !$_SESSION['is_logged_in']) {
+    if(!str_contains($_SERVER['PHP_SELF'], "login.php") && !Session::getInstance()->isSignedIn()) {
         redirect("login.php");
     }
 ?>

@@ -1,24 +1,12 @@
 <?php require_once("includes/header.php"); ?>
 <?php
-    if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) {
+    if (Session::getInstance()->isSignedIn()) {
         redirect("index.php");
     }
     
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($_POST['submit'])) {
-        $database = new Database();
-        $user_repo = new UserRepository($database->getConnection());
-        $current_user = $user_repo->verifyUser($post['username'], $post['password']);
-        if ($current_user) {
-            $_SESSION['is_logged_in'] = true;
-            $_SESSION['user_data'] = array(
-                "id" => $current_user->getId(),
-                "username" => $current_user->getUsername()
-            );
-            redirect("index.php");
-        } else {
-            setMessage("Invalid password or username");
-        }
+        Session::getInstance()->signIn($post['username'], $post['password']);
     } else {
         unset($post);
     }
