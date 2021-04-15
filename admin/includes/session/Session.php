@@ -2,7 +2,6 @@
     
     class Session {
         
-        const SESSION_STARTED = true;
         const SESSION_NOT_STARTED = false;
         
         private static Session $instance;
@@ -13,6 +12,7 @@
         }
         
         function signIn($username, $password): void {
+            self::$instance->startSession();
             $database = new Database();
             $user_repo = new UserRepository($database->getConnection());
             $current_user = $user_repo->verifyUser($username, $password);
@@ -49,29 +49,20 @@
             if (!isset(self::$instance)) {
                 self::$instance = new Session();
             }
-            
             self::$instance->startSession();
-            
             return self::$instance;
         }
-    
-        /** @noinspection PhpReturnValueOfMethodIsNeverUsedInspection */
-        private function startSession(): bool {
+        
+        private function startSession(): void {
             if ($this->session_state === self::SESSION_NOT_STARTED) {
                 $this->session_state = session_start();
             }
             
-            return $this->session_state;
         }
-    
-        /** @noinspection PhpReturnValueOfMethodIsNeverUsedInspection */
-        private function destroySession(): bool {
-            if ($this->session_state === self::SESSION_STARTED) {
-                $this->session_state = !session_destroy();
-                unset($_SESSION);
-                return !$this->session_state;
-            }
-            return false;
+        
+        private function destroySession(): void {
+            $this->session_state = !session_destroy();
+            unset($_SESSION);
         }
     }
     
