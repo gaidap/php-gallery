@@ -78,3 +78,6 @@ fabric.properties
 # Datasource configuration
 /.idea/dataSources.xml
 /.idea/sqldialects.xml
+
+# Folder for file uploads
+uploaded_files
