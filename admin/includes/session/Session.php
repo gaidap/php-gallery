@@ -12,7 +12,6 @@
         }
         
         function signIn($username, $password): void {
-            self::$instance->startSession();
             $database = new Database();
             $user_repo = new UserRepository($database->getConnection());
             $current_user = $user_repo->verifyUser($username, $password);
