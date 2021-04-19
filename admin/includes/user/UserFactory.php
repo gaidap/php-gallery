@@ -28,6 +28,7 @@
         
         static function reconstituteUser($user_assoc): User {
             $result = new User();
+            $result->setId(null);
             foreach ($user_assoc as $property => $value) {
                 $setter = StringUtils::convertPropertyToSetter($property);
                 if (method_exists($result, $setter)) {
