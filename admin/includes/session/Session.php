@@ -11,10 +11,9 @@
         private function __construct() {
         }
         
+        
         function signIn($username, $password): void {
-            $database = new Database();
-            $user_repo = new UserRepository($database->getConnection());
-            $current_user = $user_repo->verifyUser($username, $password);
+            $current_user = $this->verifyUser($username, $password);
             if ($current_user) {
                 $_SESSION['is_logged_in'] = true;
                 $_SESSION['user_data'] = array(
@@ -25,6 +24,12 @@
             } else {
                 setMessage("Invalid password or username");
             }
+        }
+        
+        private function verifyUser(string $username, string $password): ?User {
+            $user_repo = new UserRepository();
+            $current_user = $user_repo->findByUsername($username);
+            return $current_user && $current_user->checkPassword($password) ? $current_user : null;
         }
         
         function signOut(): void {

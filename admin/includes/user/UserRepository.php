@@ -3,37 +3,17 @@
     
     class UserRepository extends BaseRepository {
         
-        function create(
-            string $username,
-            string $password,
-            string $first_name,
-            string $last_name
-        ): int|string {
-            $stmt = $this->prepareStatement('INSERT INTO users (username, password, first_name, last_name) values (?,?,?,?)');
-            
-            list($username, $password, $first_name, $last_name) = $this->createNewUserDtoAttributes($username, $password, $first_name, $last_name);
-            $stmt->bind_param('ssss', $username, $password, $first_name, $last_name);
+        function deleteUser(User $user): bool|string {
+            $stmt = $this->prepareStatement('DELETE FROM users WHERE id=?');
+            $id = $user->getId();
+            $stmt->bind_param('i', $id);
             $stmt->execute();
-            
+    
             if ($stmt->errno) {
                 return $stmt->error;
             }
             
-            return $stmt->insert_id;
-        }
-        
-        private function createNewUserDtoAttributes(string $username, string $password, string $first_name, string $last_name): array {
-            $user = UserFactory::createNewUser($username, $password, $first_name, $last_name);
-            $username = $user->getUsername();
-            $password = $user->getPassword();
-            $first_name = $user->getFirstName();
-            $last_name = $user->getLastName();
-            return array($username, $password, $first_name, $last_name);
-        }
-        
-        function verifyUser(string $username, string $password): ?User {
-            $current_user = $this->findByUsername($username);
-            return $current_user && $current_user->checkPassword($password) ? $current_user : null;
+            return true;
         }
         
         function listUsers(): array {

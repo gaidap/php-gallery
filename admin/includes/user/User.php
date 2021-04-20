@@ -66,6 +66,21 @@
             return $this;
         }
         
+        function save(): User|string {
+            $stmt = $this->prepareStatement('INSERT INTO users (username, password, first_name, last_name) values (?,?,?,?)');
+    
+            list($username, $password, $first_name, $last_name) = array($this->getUsername(), $this->getPassword(), $this->getFirstName(), $this->getLastName());
+            $stmt->bind_param('ssss', $username, $password, $first_name, $last_name);
+            $stmt->execute();
+    
+            if ($stmt->errno) {
+                return $stmt->error;
+            }
+            
+            $this->setId($stmt->insert_id);
+            return $this;
+        }
+        
         function update(): User|string {
             $stmt = $this->prepareStatement('UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ? WHERE id=?');
             
