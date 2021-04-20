@@ -3,10 +3,10 @@
     
     abstract class BaseRepository {
         
-        private mysqli $db_connection;
+        private mysqli|null $db_connection;
         
-        function __construct($db_connection) {
-            $this->db_connection = $db_connection;
+        function __construct() {
+            $this->db_connection = Database::createConnection();
         }
         
         protected function executeQuery($sql): mysqli_result|bool {

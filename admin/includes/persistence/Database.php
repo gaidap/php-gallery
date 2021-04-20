@@ -2,16 +2,14 @@
     
     class Database {
         
+        private static Database|null $instance = null;
+        
         private mysqli|null $connection = null;
         
-        function __construct() {
+        private function __construct() {
             $this->openDbConnection();
         }
         
-        function __destruct() {
-            $this->connection->close();
-        }
-    
         private function openDbConnection() {
             $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
             if ($this->connection->errno) {
@@ -21,6 +19,13 @@
         
         function getConnection(): mysqli|null {
             return $this->connection;
+        }
+        
+        static function createConnection(): ?mysqli {
+            if (self::$instance === null) {
+                self::$instance = new Database();
+            }
+            return self::$instance->getConnection();
         }
     }
     

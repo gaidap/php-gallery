@@ -7,6 +7,12 @@
                 Administration
                 <small>PHP-Gallery administration</small>
             </h1>
+            <?php
+                $user_repo = new UserRepository();
+                $user = $user_repo->findById(2);
+                $user->setLastName('Nichtlustig');
+                $user->update();
+            ?>
             <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-dashboard"></i> <a href="index.php">Dashboard</a>

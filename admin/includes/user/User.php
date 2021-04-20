@@ -1,7 +1,7 @@
 <?php
     
     
-    class User {
+    class User extends BaseRepository {
         
         private int|null $id;
         private string $username;
@@ -66,6 +66,19 @@
             return $this;
         }
         
+        function update(): User|string {
+            $stmt = $this->prepareStatement('UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ? WHERE id=?');
+            
+            list($username, $password, $first_name, $last_name, $id) = array($this->getUsername(), $this->getPassword(), $this->getFirstName(), $this->getLastName(), $this->getId());
+            $stmt->bind_param('ssssi', $username, $password, $first_name, $last_name, $id);
+            $stmt->execute();
+            
+            if ($stmt->errno) {
+                return $stmt->error;
+            }
+            
+            return $this;
+        }
         
         function __toString(): string {
             return "ID: $this->id,
