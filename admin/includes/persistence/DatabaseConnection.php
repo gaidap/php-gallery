@@ -1,7 +1,7 @@
 <?php
     
     
-    abstract class BaseRepository {
+    abstract class DatabaseConnection {
         
         private mysqli|null $db_connection;
         

@@ -1,7 +1,7 @@
 <?php
     
     
-    class UserRepository extends BaseRepository {
+    class UserRepository extends DatabaseConnection {
         
         function deleteUser(User $user): bool|string {
             $stmt = $this->prepareStatement('DELETE FROM users WHERE id=?');

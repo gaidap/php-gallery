@@ -1,7 +1,7 @@
 <?php
     
     
-    class User extends BaseRepository {
+    class User extends DatabaseConnection {
         
         private int|null $id;
         private string $username;
