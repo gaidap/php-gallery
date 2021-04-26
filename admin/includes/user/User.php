@@ -1,7 +1,9 @@
 <?php
     
     
-    class User extends DatabaseConnection {
+    class User {
+        
+        public const TABLE = ' users ';
         
         private int|null $id;
         private string $username;
@@ -63,35 +65,6 @@
         
         function setCreationDate(string $creation_date): User {
             $this->creation_date = $creation_date;
-            return $this;
-        }
-        
-        function save(): User|string {
-            $stmt = $this->prepareStatement('INSERT INTO users (username, password, first_name, last_name) values (?,?,?,?)');
-    
-            list($username, $password, $first_name, $last_name) = array($this->getUsername(), $this->getPassword(), $this->getFirstName(), $this->getLastName());
-            $stmt->bind_param('ssss', $username, $password, $first_name, $last_name);
-            $stmt->execute();
-    
-            if ($stmt->errno) {
-                return $stmt->error;
-            }
-            
-            $this->setId($stmt->insert_id);
-            return $this;
-        }
-        
-        function update(): User|string {
-            $stmt = $this->prepareStatement('UPDATE users SET username = ?, password = ?, first_name = ?, last_name = ? WHERE id=?');
-            
-            list($username, $password, $first_name, $last_name, $id) = array($this->getUsername(), $this->getPassword(), $this->getFirstName(), $this->getLastName(), $this->getId());
-            $stmt->bind_param('ssssi', $username, $password, $first_name, $last_name, $id);
-            $stmt->execute();
-            
-            if ($stmt->errno) {
-                return $stmt->error;
-            }
-            
             return $this;
         }
         
