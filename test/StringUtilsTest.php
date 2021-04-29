@@ -47,4 +47,20 @@
         public function testConvertPropertyToSetterReturnsSetterOfPropertyInCamelCaseForm() {
             self::assertEquals('setLifeOfBrian', StringUtils::convertPropertyToSetter('LifeOfBrian'));
         }
+        
+        public function testConvertPropertyToGetterReturnsJustSetIfPropertyIsNull() {
+            self::assertEquals('get', StringUtils::convertPropertyToGetter(null));
+        }
+        
+        public function testConvertPropertyToGetterReturnsSetterOfPropertyInCamelCase() {
+            self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('life_of_brian'));
+        }
+        
+        public function testConvertPropertyToGetterReturnsSetterOfPropertyInMixedForm() {
+            self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('life_ofBrian'));
+        }
+        
+        public function testConvertPropertyToGetterReturnsSetterOfPropertyInCamelCaseForm() {
+            self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('LifeOfBrian'));
+        }
     }
