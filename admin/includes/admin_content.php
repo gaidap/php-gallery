@@ -7,6 +7,11 @@
                 Administration
                 <small>PHP-Gallery administration</small>
             </h1>
+            <?php
+                $user_repo = new UserRepository();
+                $user  = UserFactory::createNewUser('robin', '1234', 'Robin', 'Gaida');
+                $user_repo->save($user);
+            ?>
             <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-dashboard"></i> <a href="index.php">Dashboard</a>

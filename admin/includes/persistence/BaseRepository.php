@@ -63,7 +63,7 @@
         }
         
         private function createPropertyTypes(BaseEntity $entity): string {
-            return implode(',', array_values($entity->getProperties()));
+            return implode(array_values($entity->getProperties()));
         }
         
         private function createPlaceholders(BaseEntity $entity): string {
