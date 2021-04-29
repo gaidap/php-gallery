@@ -36,6 +36,20 @@
             $entity->setId($stmt->insert_id);
             return $entity;
         }
+    
+        function update(BaseEntity $entity): BaseEntity|string {
+            $stmt = $this->prepareStatement($this->createUpdateSqlStatement($entity));
+            $property_values = $this->extractPropertyValues($entity);
+            array_push($property_values, $entity->getId());
+            $stmt->bind_param($this->createPropertyTypes($entity) . 'i', ...$property_values);
+            $stmt->execute();
+        
+            if ($stmt->errno) {
+                return $stmt->error;
+            }
+        
+            return $entity;
+        }
         
         private function extractPropertyValues(BaseEntity $entity): array {
             $property_values = [];
@@ -65,20 +79,6 @@
             $sql .= $this->createPropertyNames($entity);
             $sql .= ' values ' . $this->createPlaceholders($entity);
             return $sql;
-        }
-        
-        function update(BaseEntity $entity): BaseEntity|string {
-            $stmt = $this->prepareStatement($this->createUpdateSqlStatement($entity));
-            $property_values = $this->extractPropertyValues($entity);
-            array_push($property_values, $entity->getId());
-            $stmt->bind_param($this->createPropertyTypes($entity) . 'i', ...$property_values);
-            $stmt->execute();
-            
-            if ($stmt->errno) {
-                return $stmt->error;
-            }
-            
-            return $entity;
         }
         
         private function createUpdateSqlStatement(BaseEntity $entity): string {
