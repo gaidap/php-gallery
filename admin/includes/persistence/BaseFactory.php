@@ -4,7 +4,7 @@
     abstract class BaseFactory {
         
         static function reconstitute($result_assoc): BaseEntity {
-            $result = BaseFactory::createNewEntity();
+            $result = static::createNewEntity();
             $result->setId(null);
             foreach ($result_assoc as $property => $value) {
                 $setter = StringUtils::convertPropertyToSetter($property);
