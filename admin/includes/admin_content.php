@@ -7,7 +7,7 @@
                 Administration
                 <small>PHP-Gallery administration</small>
             </h1>
-Remno            <ol class="breadcrumb">
+            <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-dashboard"></i> <a href="index.php">Dashboard</a>
                 </li>

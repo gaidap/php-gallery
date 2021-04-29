@@ -25,8 +25,8 @@
                 return $this->update($entity);
             }
             $stmt = $this->prepareStatement($this->createInsertSqlStatement($entity));
-            $stmt->bind_param($this->createPropertyTypes($entity),
-                ...$this->extractPropertyValues($entity));
+            $stmt->bind_param($entity->getPropertyTypes(),
+                ...$entity->getPropertyValues());
             $stmt->execute();
             
             if ($stmt->errno) {
@@ -39,9 +39,9 @@
         
         function update(BaseEntity $entity): BaseEntity|string {
             $stmt = $this->prepareStatement($this->createUpdateSqlStatement($entity));
-            $property_values = $this->extractPropertyValues($entity);
+            $property_values = $entity->getPropertyValues();
             array_push($property_values, $entity->getId());
-            $stmt->bind_param($this->createPropertyTypes($entity) . 'i', ...$property_values);
+            $stmt->bind_param($entity->getPropertyTypes() . 'i', ...$property_values);
             $stmt->execute();
             
             if ($stmt->errno) {
@@ -51,24 +51,8 @@
             return $entity;
         }
         
-        private function extractPropertyValues(BaseEntity $entity): array {
-            $property_values = [];
-            foreach (array_keys($entity->getProperties()) as $property) {
-                $getter = StringUtils::convertPropertyToGetter($property);
-                if (method_exists($entity, $getter)) {
-                    array_push($property_values, $entity->$getter());
-                }
-            }
-            return $property_values;
-        }
-        
         private function createPropertyNamesToUpdate(BaseEntity $entity): string {
-            //username = ?, password = ?, first_name = ?, last_name = ?
-            return implode('=?,', array_keys($entity->getProperties())) . '=?';
-        }
-        
-        private function createPropertyTypes(BaseEntity $entity): string {
-            return implode(array_values($entity->getProperties()));
+            return implode('=?,', $entity->getProperties()) . '=?';
         }
         
         private function createPlaceholders(BaseEntity $entity): string {
@@ -76,7 +60,7 @@
         }
         
         private function createPropertyNames(BaseEntity $entity): string {
-            return '(' . implode(',', array_keys($entity->getProperties())) . ')';
+            return '(' . implode(',', $entity->getProperties()) . ')';
         }
         
         private function createInsertSqlStatement(BaseEntity $entity): string {
