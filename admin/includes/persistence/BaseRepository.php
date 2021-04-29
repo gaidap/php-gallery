@@ -1,7 +1,7 @@
 <?php
     
     
-    class BaseRepository extends DatabaseConnection {
+    abstract class BaseRepository extends DatabaseConnection {
         
         function __construct() {
             parent::__construct();
@@ -78,7 +78,7 @@
         }
         
         function findAll(): array {
-            $result = $this->executeQuery('SELECT * FROM' . BaseEntity::getTableName());
+            $result = $this->executeQuery('SELECT * FROM' . static::getTableName());
             if ($this->isResultEmpty($result)) {
                 return [];
             }
@@ -86,7 +86,7 @@
         }
         
         function findById($id): ?BaseEntity {
-            $stmt = $this->prepareStatement('SELECT * FROM' . BaseEntity::getTableName() . 'WHERE id = ?');
+            $stmt = $this->prepareStatement('SELECT * FROM' . static::getTableName() . 'WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -102,4 +102,5 @@
             return !$result || $result->num_rows === 0;
         }
     
+        abstract protected function getTableName (): string;
     }

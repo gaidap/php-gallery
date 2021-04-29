@@ -14,7 +14,7 @@
             }
             return $result;
         }
-    
+        
         static function reconstituteArray($user_array): array {
             $result = [];
             foreach ($user_array as $user_assoc) {
@@ -22,6 +22,6 @@
             }
             return $result;
         }
-    
-        protected static abstract function createNewEntity(): BaseEntity;
+        
+        abstract protected static function createNewEntity(): BaseEntity;
     }
