@@ -36,18 +36,18 @@
             $entity->setId($stmt->insert_id);
             return $entity;
         }
-    
+        
         function update(BaseEntity $entity): BaseEntity|string {
             $stmt = $this->prepareStatement($this->createUpdateSqlStatement($entity));
             $property_values = $this->extractPropertyValues($entity);
             array_push($property_values, $entity->getId());
             $stmt->bind_param($this->createPropertyTypes($entity) . 'i', ...$property_values);
             $stmt->execute();
-        
+            
             if ($stmt->errno) {
                 return $stmt->error;
             }
-        
+            
             return $entity;
         }
         
@@ -60,6 +60,11 @@
                 }
             }
             return $property_values;
+        }
+        
+        private function createPropertyNamesToUpdate(BaseEntity $entity): string {
+            //username = ?, password = ?, first_name = ?, last_name = ?
+            return implode('=?,', array_keys($entity->getProperties())) . '=?';
         }
         
         private function createPropertyTypes(BaseEntity $entity): string {
@@ -82,11 +87,12 @@
         }
         
         private function createUpdateSqlStatement(BaseEntity $entity): string {
-            $sql = 'UPDATE ' . $entity->getTable() . ' SET ';
-            $sql .= ' SET username = ?, password = ?, first_name = ?, last_name = ? WHERE id=?';
+            $sql = 'UPDATE ' . $entity->getTable();
+            $sql .= ' SET ' . $this->createPropertyNamesToUpdate($entity);
+            $sql .= ' WHERE id=?';
             return $sql;
         }
-    
+        
         function findAll(): array {
             $result = $this->executeQuery('SELECT * FROM' . BaseEntity::getTableName());
             if ($this->isResultEmpty($result)) {
@@ -94,21 +100,22 @@
             }
             return BaseFactory::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
         }
-    
+        
         function findById($id): ?User {
             $stmt = $this->prepareStatement('SELECT * FROM' . BaseEntity::getTableName() . 'WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute();
             $result = $stmt->get_result();
-        
+            
             if ($this->isResultEmpty($result)) {
                 return null;
             }
-        
+            
             return BaseFactory::reconstitute($result->fetch_assoc());
         }
-    
+        
         protected function isResultEmpty(mysqli_result|bool $result): bool {
             return !$result || $result->num_rows === 0;
         }
+    
     }

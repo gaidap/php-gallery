@@ -11,6 +11,10 @@
                 $user_repo = new UserRepository();
                 $user  = UserFactory::createNewUser('robin', '1234', 'Robin', 'Gaida');
                 $user_repo->save($user);
+                $robin = $user_repo->findByUsername('robin');
+                $robin->setFirstName('Robin Antonio');
+                $user_repo->save($robin);
+                $user_repo->delete($robin);
             ?>
             <ol class="breadcrumb">
                 <li>
