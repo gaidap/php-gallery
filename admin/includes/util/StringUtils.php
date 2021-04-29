@@ -21,4 +21,8 @@
         static function convertPropertyToSetter($property): string {
             return 'set' . StringUtils::snakeToCamel($property, true);
         }
+    
+        static function convertPropertyToGetter($property): string {
+            return 'get' . StringUtils::snakeToCamel($property, true);
+        }
     }
