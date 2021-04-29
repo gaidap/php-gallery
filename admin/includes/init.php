@@ -5,6 +5,7 @@
     require_once("message.php");
     require_once("persistence/Database.php");
     require_once("persistence/DatabaseConnection.php");
+    require_once("persistence/BaseFactory.php");
     require_once("persistence/BaseRepository.php");
     require_once("persistence/BaseEntity.php");
     require_once("user/User.php");

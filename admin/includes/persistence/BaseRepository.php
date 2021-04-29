@@ -86,4 +86,29 @@
             $sql .= ' SET username = ?, password = ?, first_name = ?, last_name = ? WHERE id=?';
             return $sql;
         }
+    
+        function findAll(): array {
+            $result = $this->executeQuery('SELECT * FROM' . BaseEntity::getTableName());
+            if ($this->isResultEmpty($result)) {
+                return [];
+            }
+            return BaseFactory::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
+        }
+    
+        function findById($id): ?User {
+            $stmt = $this->prepareStatement('SELECT * FROM' . BaseEntity::getTableName() . 'WHERE id = ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($this->isResultEmpty($result)) {
+                return null;
+            }
+        
+            return BaseFactory::reconstitute($result->fetch_assoc());
+        }
+    
+        protected function isResultEmpty(mysqli_result|bool $result): bool {
+            return !$result || $result->num_rows === 0;
+        }
     }
