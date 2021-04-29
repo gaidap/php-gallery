@@ -85,7 +85,7 @@
             return BaseFactory::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
         }
         
-        function findById($id): ?User {
+        function findById($id): ?BaseEntity {
             $stmt = $this->prepareStatement('SELECT * FROM' . BaseEntity::getTableName() . 'WHERE id = ?');
             $stmt->bind_param('i', $id);
             $stmt->execute();
