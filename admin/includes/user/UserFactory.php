@@ -9,13 +9,16 @@
             string $first_name,
             string $last_name
         ): User {
-            return self::reconstitute([
+            return self::castToUser(self::reconstitute([
                 'username' => $username,
                 'password' => $password,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
-                ]);
-            
+            ]));
+        }
+    
+        static function castToUser($entity): User {
+            return $entity;
         }
     
         protected static function createNewEntity(): BaseEntity {

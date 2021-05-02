@@ -17,7 +17,7 @@
                 return null;
             }
             
-            return UserFactory::reconstitute($result->fetch_assoc());
+            return UserFactory::castToUser(UserFactory::reconstitute($result->fetch_assoc()));
         }
         
         protected function getTableName (): string {

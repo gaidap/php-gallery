@@ -7,8 +7,7 @@
         private string $password;
         private string $first_name;
         private string $last_name;
-        private string $creation_date;
-        
+    
         function __construct() {
             $this->table = ' users ';
             $this->properties = array('username' => 's', 'password' => 's', 'first_name' => 's', 'last_name' => 's');
@@ -54,13 +53,12 @@
         function getLastName(): string {
             return $this->last_name;
         }
-        
-        
+    
         function setCreationDate(string $creation_date): User {
             $this->creation_date = $creation_date;
             return $this;
         }
-        
+    
         static function getTableName(): string {
             return (new User())->getTable();
         }
