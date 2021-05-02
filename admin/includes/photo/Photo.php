@@ -7,7 +7,7 @@
         private string $title;
         private string $type;
         private int $size;
-        private string $description;
+        private string|null $description;
         
         function __construct() {
             $this->table = ' photos ';
@@ -49,12 +49,12 @@
             $this->size = $size;
             return $this;
         }
-        
-        function getDescription(): string {
+    
+        function getDescription(): string|null {
             return $this->description;
         }
-        
-        function setDescription(string $description): Photo {
+    
+        function setDescription(string|null $description): Photo {
             $this->description = $description;
             return $this;
         }
