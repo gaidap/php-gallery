@@ -2,18 +2,20 @@
     
     
     class Photo extends BaseEntity {
-        
+    
         private string $file;
         private string $title;
         private string $type;
         private int $size;
         private string|null $description;
-        
+    
+        private string $tmp_file = '';
+    
         function __construct() {
             $this->table = ' photos ';
             $this->properties = array('file' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
         }
-        
+    
         function getFile(): string {
             return $this->file;
         }
@@ -58,16 +60,26 @@
             $this->description = $description;
             return $this;
         }
-        
+    
         function setCreationDate(string $creation_date): Photo {
             $this->creation_date = $creation_date;
             return $this;
         }
-        
+    
+        function getTmpFile(): string {
+            return $this->tmp_file;
+        }
+    
+        function setTmpFile(string $tmp_file): Photo {
+            $this->tmp_file = $tmp_file;
+            return $this;
+        }
+    
+    
         static function getTableName(): string {
             return (new Photo())->getTable();
         }
-        
+    
         function __toString(): string {
             return "ID: $this->id,
                     file: $this->file,
