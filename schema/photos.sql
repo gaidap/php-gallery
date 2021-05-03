@@ -4,6 +4,7 @@ create table photos
     id            int auto_increment
         primary key,
     file          varchar(255)                          not null,
+    file_name     varchar(255)                          not null,
     title         varchar(255)                          not null,
     type          varchar(255)                          not null,
     size          int                                   not null,

@@ -35,6 +35,7 @@
             if ($this->moveFile($file)) {
                 $photo = PhotoFactory::createNewPhoto(
                     $this->getTargetDir($file),
+                    $this->getFileName($file),
                     $title,
                     $this->getFileType($file),
                     $this->getFileSize($file),

@@ -5,6 +5,7 @@
         
         static function createNewPhoto(
             string $file,
+            string $fileName,
             string $title,
             string $type,
             string $size,
@@ -12,6 +13,7 @@
         ): Photo {
             return self::castToPhoto(self::reconstitute([
                 'file' => $file,
+                'fileName' => $fileName,
                 'title' => $title,
                 'type' => $type,
                 'size' => $size,

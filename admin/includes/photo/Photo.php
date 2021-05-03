@@ -6,6 +6,7 @@
         private const supported_files = array('JPG', 'JPEG', 'TIFF', 'PNG', 'GIF');
         
         private string $file;
+        private string $fileName;
         private string $title;
         private string $type;
         private int $size;
@@ -13,7 +14,7 @@
         
         function __construct() {
             $this->table = ' photos ';
-            $this->properties = array('file' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
+            $this->properties = array('file' => 's', 'file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
         }
         
         public static function isFileSupported($file_type): bool {
@@ -24,22 +25,35 @@
             return $this->file;
         }
         
-        function getUrl(): string {
-            return $this->normalizePath();
+        function setFile(string $file): Photo {
+            $this->file = $file;
+            return $this;
         }
         
-        private function normalizePath() {
-            $path = str_replace('\\', '/', $this->file);
+        public function getFileName(): string {
+            return $this->fileName;
+        }
+        
+        public function setFileName(string $fileName): Photo {
+            $this->fileName = $fileName;
+            return $this;
+        }
+        
+        function getUrl(): string {
+            return $this->normalizePath($this->file);
+        }
+        
+        function getRelativePath(): string {
+            return $this->normalizePath('..' . DS . UPLOAD_FOLDER  . DS . $this->fileName);
+        }
+        
+        private function normalizePath($path) {
+            $path = str_replace('\\', '/', $path);
             $path = preg_replace('|(?<=.)/+|', '/', $path);
             if (':' === substr($path, 1, 1)) {
                 $path = ucfirst($path);
             }
             return $path;
-        }
-        
-        function setFile(string $file): Photo {
-            $this->file = $file;
-            return $this;
         }
         
         function getTitle(): string {

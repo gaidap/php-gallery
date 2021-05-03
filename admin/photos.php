@@ -37,7 +37,8 @@
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
                                     . "<td>" . $photo->getCreationDate() . "</td>\n"
-                                    . "<td><img src='http://placehold.it/62x62' alt='" . $photo->getFile() . "'></td>\n";
+                                    . "<td><img src=' " . $photo->getRelativePath() ."' alt='" . $photo->getFile()
+                                    . "' style='max-height: 100px; max-width: 100px;'></td>\n";
                             }
                         ?>
                         </tbody>
