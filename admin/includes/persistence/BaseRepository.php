@@ -82,7 +82,7 @@
             if ($this->isResultEmpty($result)) {
                 return [];
             }
-            return BaseFactory::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
+            return static::getFactoryClass()::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
         }
         
         function findById($id): ?BaseEntity {
@@ -95,7 +95,7 @@
                 return null;
             }
             
-            return BaseFactory::reconstitute($result->fetch_assoc());
+            return static::getFactoryClass()::reconstitute($result->fetch_assoc());
         }
         
         protected function isResultEmpty(mysqli_result|bool $result): bool {
@@ -103,4 +103,6 @@
         }
     
         abstract protected function getTableName (): string;
+        
+        abstract protected function getFactoryClass (): BaseFactory;
     }

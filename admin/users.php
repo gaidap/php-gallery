@@ -14,24 +14,40 @@
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Users
-                    <small>Subheading</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
-                    </li>
-                </ol>
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Creation date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $repo = new UserRepository();
+                            $users = $repo->findAll();
+                            foreach ($users as $user) {
+                                echo "<td>" . $user->getId() . "</td>\n"
+                                    . "<td>" . $user->getUsername() . "</td>\n"
+                                    . "<td>" . $user->getFirstName() . "</td>\n"
+                                    . "<td>" . $user->getLastName() . "</td>\n"
+                                    . "<td>" . $user->getCreationDate() . "</td>\n";
+                            }
+                        ?>
+                        </tbody>
+                    </table> <!--End of Table-->
+                </div>
             </div>
+            <!-- /.row -->
+
         </div>
-        <!-- /.row -->
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-<?php require_once("includes/footer.php"); ?>
+    <!-- /#page-wrapper -->
+    
+    <?php require_once("includes/footer.php"); ?>

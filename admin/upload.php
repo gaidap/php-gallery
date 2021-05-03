@@ -1,9 +1,11 @@
 <?php require_once("includes/header.php"); ?>
 <?php
-    
     if (isset($_POST['submit_upload'])) {
         $service = new PhotoUploadService();
-        $service->savePhotoFile($_FILES['file_upload'], $_POST['title']);
+        if($service->savePhotoFile($_FILES['file_upload'], $_POST['title'])) {
+            unset($_POST);
+            header("Location: ".$_SERVER['PHP_SELF']);
+        }
     }
 
 ?>

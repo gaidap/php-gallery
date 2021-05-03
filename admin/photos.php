@@ -8,26 +8,45 @@
 
 <div id="page-wrapper">
     <div class="container-fluid">
-        
+
         <!-- Page Heading -->
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
                     Photos
-                    <small>Subheading</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
-                    </li>
-                </ol>
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>File</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Creation date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $repo = new PhotoRepository();
+                            $photos = $repo->findAll();
+                            foreach ($photos as $photo) {
+                                echo "<td>" . $photo->getId() . "</td>\n"
+                                    . "<td>" . $photo->getTitle() . "</td>\n"
+                                    . "<td>" . $photo->getFile() . "</td>\n"
+                                    . "<td>" . $photo->getType() . "</td>\n"
+                                    . "<td>" . $photo->getSize() . "</td>\n"
+                                    . "<td>" . $photo->getCreationDate() . "</td>\n";
+                            }
+                        ?>
+                        </tbody>
+                    </table> <!--End of Table-->
+                </div>
             </div>
         </div>
         <!-- /.row -->
-    
+
     </div>
     <!-- /.container-fluid -->
 

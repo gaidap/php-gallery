@@ -23,4 +23,8 @@
         protected function getTableName (): string {
             return User::getTableName();
         }
+    
+        protected function getFactoryClass(): BaseFactory {
+            return new UserFactory;
+        }
     }
