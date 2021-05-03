@@ -21,10 +21,10 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>File</th>
                             <th>Type</th>
                             <th>Size</th>
                             <th>Creation date</th>
+                            <th>Preview</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,10 +34,10 @@
                             foreach ($photos as $photo) {
                                 echo "<td>" . $photo->getId() . "</td>\n"
                                     . "<td>" . $photo->getTitle() . "</td>\n"
-                                    . "<td>" . $photo->getFile() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
-                                    . "<td>" . $photo->getCreationDate() . "</td>\n";
+                                    . "<td>" . $photo->getCreationDate() . "</td>\n"
+                                    . "<td><img src='http://placehold.it/62x62' alt='" . $photo->getFile() . "'></td>\n";
                             }
                         ?>
                         </tbody>

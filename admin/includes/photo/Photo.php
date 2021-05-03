@@ -11,8 +11,6 @@
         private int $size;
         private string|null $description;
         
-        private string $tmp_file = '';
-        
         function __construct() {
             $this->table = ' photos ';
             $this->properties = array('file' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
@@ -24,6 +22,19 @@
         
         function getFile(): string {
             return $this->file;
+        }
+        
+        function getUrl(): string {
+            return $this->normalizePath();
+        }
+        
+        private function normalizePath() {
+            $path = str_replace('\\', '/', $this->file);
+            $path = preg_replace('|(?<=.)/+|', '/', $path);
+            if (':' === substr($path, 1, 1)) {
+                $path = ucfirst($path);
+            }
+            return $path;
         }
         
         function setFile(string $file): Photo {
