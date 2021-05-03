@@ -1,5 +1,6 @@
 <?php
     require_once("db_config.php");
+    require_once("path_config.php");
     require_once("autoloader.php");
     require_once("redirect.php");
     require_once("message.php");
@@ -11,6 +12,7 @@
     require_once("photo/Photo.php");
     require_once("photo/PhotoFactory.php");
     require_once("photo/PhotoRepository.php");
+    require_once("photo/PhotoUploadService.php");
     require_once("user/User.php");
     require_once("user/UserFactory.php");
     require_once("user/UserRepository.php");

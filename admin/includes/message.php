@@ -3,6 +3,10 @@
         $_SESSION['message'] = $msg;
     }
     
+    function isMessageSet(): bool {
+        return isset($_SESSION['message']);
+    }
+    
     function showMessage() {
         if (!isset($_SESSION['message'])) {
             return "";

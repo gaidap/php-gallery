@@ -9,6 +9,7 @@ You have to specify the following env variables on your server:
 - GALLERY_DB_NAME
 - GALLERY_DB_USER
 - GALLERY_DB_PASSWORD
+- GALLERY_UPLOAD_PATH
 
 Also you have to provide the schema specified under /schema.
 
