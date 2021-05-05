@@ -19,7 +19,7 @@
         ];
     
         function deletePhotoFile($id): bool|string {
-            if (!is_int($id)) {
+            if ($this->isIdValid($id)) {
                 setMessage("ID must be a valid int.");
                 return false;
             }
@@ -35,6 +35,10 @@
                 $this->cleanUpAndSetErrorMsg($delete_result, $file);
             }
             return $delete_result;
+        }
+    
+        private function isIdValid($id): bool {
+            return is_numeric($id) && !is_int($id + 0);
         }
     
         function savePhotoFile($file, $title, $description = null): bool {
