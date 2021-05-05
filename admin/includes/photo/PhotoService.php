@@ -19,7 +19,15 @@
         ];
     
         function deletePhotoFile($id): bool|string {
+            if (!is_int($id)) {
+                setMessage("ID must be a valid int.");
+                return false;
+            }
             $photo = PhotoFactory::castToPhoto($this->repo->findById($id));
+            if (!$photo) {
+                setMessage("Photo not exists in database.");
+                return false;
+            }
             $delete_result = $this->repo->delete($photo);
             $file = ['name' => $photo->getFileName()];
             if ($delete_result) {

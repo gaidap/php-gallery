@@ -17,7 +17,7 @@
             ]));
         }
     
-        static function castToUser($entity): User {
+        static function castToUser($entity): User|null {
             return $entity;
         }
     

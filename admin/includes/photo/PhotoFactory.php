@@ -22,7 +22,7 @@
             
         }
         
-        static function castToPhoto($entity): Photo {
+        static function castToPhoto($entity): Photo|null {
             return $entity;
         }
         
