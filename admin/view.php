@@ -1,8 +1,9 @@
 <?php require_once("includes/header.php"); ?>
 <?php
+    $photo = null;
     if (isset($_GET['id'])) {
-        $service = new PhotoService();
-        $service->deletePhotoFile($_GET['id']);
+        $repo = new PhotoRepository();
+        $photo = PhotoFactory::castToPhoto($repo->findById($_GET['id']));
     }
 ?>
 <!-- Navigation -->
@@ -20,11 +21,8 @@
                     Upload Section
                 </h1>
                 <div class="col-md-6">
-                    <?php
-                        if (isMessageSet()) {
-                            echo "<div><pre>" . showMessage() . "</pre></div>";
-                        }
-                    ?>
+                    <img src="<?php echo $photo?->getRelativePath() ?? 'NO FILE'; ?>"
+                         alt="<?php echo $photo?->getFileName() ?? 'NO FILE'; ?>">
                     <a href="photos.php" class="btn btn-primary" role="button">Back to photos</a>
                 </div>
             </div>

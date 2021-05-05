@@ -40,7 +40,10 @@
                                     . "<td>" . $photo->getSize() . "</td>\n"
                                     . "<td>" . $photo->getCreationDate() . "</td>\n"
                                     . "<td><img src=' " . $photo->getRelativePath() . "' alt='" . $photo->getFile()
-                                    . "' style='max-height: 100px; max-width: 100px;'></td>\n";
+                                    . "' style='max-height: 100px; max-width: 100px;'>"
+                                    . "<div>"
+                                    . "<a href='view.php?id=" . $photo->getId() . "'>View<a/>"
+                                    . "</div></td>\n";
                             }
                         ?>
                         </tbody>
