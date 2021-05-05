@@ -1,8 +1,8 @@
 <?php require_once("includes/header.php"); ?>
 <?php
-    if (isset($_POST['submit_upload'])) {
+    if (isset($_GET['id'])) {
         $service = new PhotoService();
-        $service->savePhotoFile($_FILES['file_upload'], $_POST['title']);
+        $service->deletePhotoFile($_GET['id']);
     }
 
 ?>
@@ -28,11 +28,7 @@
                                     echo "<div><pre>" . showMessage() . "</pre></div>";
                                 }
                             ?>
-                            <label>Title:</label><br>
-                            <input type="text" name="title"><br><br>
-                            <label>Select a file...</label><br>
-                            <input type="file" name="file_upload"><br><br>
-                            <input type="submit" name="submit_upload" value="Upload">
+                            <a href="photos.php" class="btn btn-primary" role="button">Back to photos</a>
                         </div>
                     </form>
                 </div>

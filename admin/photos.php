@@ -19,6 +19,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>ID</th>
                             <th>Title</th>
                             <th>Type</th>
@@ -32,12 +33,13 @@
                             $repo = new PhotoRepository();
                             $photos = $repo->findAll();
                             foreach ($photos as $photo) {
-                                echo "<td>" . $photo->getId() . "</td>\n"
+                                echo "<td><a href='delete.php?id=" . $photo->getId() . "' class='btn btn-danger btn-sm' role='button'>x</a></td>\n"
+                                    . "<td>" . $photo->getId() . "</td>\n"
                                     . "<td>" . $photo->getTitle() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
                                     . "<td>" . $photo->getCreationDate() . "</td>\n"
-                                    . "<td><img src=' " . $photo->getRelativePath() ."' alt='" . $photo->getFile()
+                                    . "<td><img src=' " . $photo->getRelativePath() . "' alt='" . $photo->getFile()
                                     . "' style='max-height: 100px; max-width: 100px;'></td>\n";
                             }
                         ?>

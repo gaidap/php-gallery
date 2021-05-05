@@ -12,7 +12,7 @@
     require_once("photo/Photo.php");
     require_once("photo/PhotoFactory.php");
     require_once("photo/PhotoRepository.php");
-    require_once("photo/PhotoUploadService.php");
+    require_once("photo/PhotoService.php");
     require_once("user/User.php");
     require_once("user/UserFactory.php");
     require_once("user/UserRepository.php");

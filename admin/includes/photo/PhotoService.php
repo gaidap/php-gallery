@@ -1,13 +1,13 @@
 <?php
     
-    class PhotoUploadService {
-        
+    class PhotoService {
+    
         private PhotoRepository $repo;
-        
+    
         function __construct() {
             $this->repo = new PhotoRepository();
         }
-        
+    
         private const upload_errors = [
             UPLOAD_ERR_INI_SIZE => "Selected file exceeds the maximal upload file size directive in php.ini.",
             UPLOAD_ERR_FORM_SIZE => "Selected file exceeds the maximal upload file size directive in the HTML form.",
@@ -17,9 +17,20 @@
             UPLOAD_ERR_CANT_WRITE => "IO error. Cannot write to disk.",
             UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload.",
         ];
-        
+    
+        function deletePhotoFile($id): bool|string {
+            $photo = PhotoFactory::castToPhoto($this->repo->findById($id));
+            $delete_result = $this->repo->delete($photo);
+            $file = ['name' => $photo->getFileName()];
+            if ($delete_result) {
+                setMessage('Photo deleted.');
+                $this->cleanUpAndSetErrorMsg($delete_result, $file);
+            }
+            return $delete_result;
+        }
+    
         function savePhotoFile($file, $title, $description = null): bool {
-            if(!$title || !is_string($title) || empty($title)) {
+            if (!$title || !is_string($title) || empty($title)) {
                 setMessage('The photo must have a title.');
                 return false;
             }
