@@ -16,7 +16,7 @@
         
         public function testSnakeToCamelReturnsFirstLetterAsUpperCaseAsDefault() {
             self::assertEquals('LifeOfBrian', StringUtils::snakeToCamel('life_of_brian', true));
-        
+    
         }
         
         public function testCamelToSnakeReturnsEmptyStringIfInputIsNull() {
@@ -29,7 +29,7 @@
         
         public function testCamelToSnakeReturnsFirstLetterAsUpperCaseAsDefault() {
             self::assertEquals('Life_of_brian', StringUtils::camelToSnake('lifeOfBrian', true));
-        
+    
         }
         
         public function testConvertPropertyToSetterReturnsJustSetIfPropertyIsNull() {
@@ -55,12 +55,20 @@
         public function testConvertPropertyToGetterReturnsSetterOfPropertyInCamelCase() {
             self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('life_of_brian'));
         }
-        
+    
         public function testConvertPropertyToGetterReturnsSetterOfPropertyInMixedForm() {
             self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('life_ofBrian'));
         }
-        
+    
         public function testConvertPropertyToGetterReturnsSetterOfPropertyInCamelCaseForm() {
             self::assertEquals('getLifeOfBrian', StringUtils::convertPropertyToGetter('LifeOfBrian'));
+        }
+    
+        public function testNormalizePathReturnsNullIfInputIsNull() {
+            self::assertNull(StringUtils::normalizePath(null));
+        }
+    
+        public function testNormalizePathConvertsWindowsPathToUnixPath() {
+            self::assertEquals('C:/test/folder', StringUtils::normalizePath('C:\test\folder'));
         }
     }

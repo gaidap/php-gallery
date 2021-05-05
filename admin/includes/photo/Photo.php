@@ -5,7 +5,6 @@
         
         private const supported_files = array('JPG', 'JPEG', 'TIFF', 'PNG', 'GIF');
         
-        private string $file;
         private string $fileName;
         private string $title;
         private string $type;
@@ -14,46 +13,26 @@
         
         function __construct() {
             $this->table = ' photos ';
-            $this->properties = array('file' => 's', 'file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
+            $this->properties = array('file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
         }
-        
-        public static function isFileSupported($file_type): bool {
+    
+        static function isFileSupported($file_type): bool {
             return in_array(strtoupper($file_type), self::supported_files);
         }
-        
-        function getFile(): string {
-            return $this->file;
-        }
-        
-        function setFile(string $file): Photo {
-            $this->file = $file;
-            return $this;
-        }
-        
-        public function getFileName(): string {
+    
+    
+        function getFileName(): string {
             return $this->fileName;
         }
-        
-        public function setFileName(string $fileName): Photo {
+    
+        function setFileName(string $fileName): Photo {
             $this->fileName = $fileName;
             return $this;
         }
         
-        function getUrl(): string {
-            return $this->normalizePath($this->file);
-        }
         
         function getRelativePath(): string {
-            return $this->normalizePath('..' . DS . UPLOAD_FOLDER  . DS . $this->fileName);
-        }
-        
-        private function normalizePath($path) {
-            $path = str_replace('\\', '/', $path);
-            $path = preg_replace('|(?<=.)/+|', '/', $path);
-            if (':' === substr($path, 1, 1)) {
-                $path = ucfirst($path);
-            }
-            return $path;
+            return StringUtils::normalizePath('..' . DS . UPLOAD_FOLDER . DS . $this->fileName);
         }
         
         function getTitle(): string {
@@ -97,23 +76,13 @@
             return $this;
         }
         
-        function getTmpFile(): string {
-            return $this->tmp_file;
-        }
-        
-        function setTmpFile(string $tmp_file): Photo {
-            $this->tmp_file = $tmp_file;
-            return $this;
-        }
-        
-        
         static function getTableName(): string {
             return (new Photo())->getTable();
         }
         
         function __toString(): string {
             return "ID: $this->id,
-                    file: $this->file,
+                    file_name: $this->fileName,
                     title: $this->title,
                     type: $this->type,
                     size: $this->size,

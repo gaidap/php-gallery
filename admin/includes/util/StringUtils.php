@@ -25,4 +25,16 @@
         static function convertPropertyToGetter($property): string {
             return 'get' . StringUtils::snakeToCamel($property, true);
         }
+    
+        static function normalizePath($path): string|null {
+            if (!$path) {
+                return null;
+            }
+            $path = str_replace('\\', '/', $path);
+            $path = preg_replace('|(?<=.)/+|', '/', $path);
+            if (':' === substr($path, 1, 1)) {
+                $path = ucfirst($path);
+            }
+            return $path;
+        }
     }
