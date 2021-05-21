@@ -41,6 +41,11 @@
                                    value="<?php echo $photo->getTitle(); ?>"><br><br>
                         </div>
                         <div class="form-group">
+                            <a class="thumbnail" href="view.php?id=<?php echo $photo->getId(); ?>">
+                                <img src="<?php echo $photo->getRelativePath() ?>" alt="<?php echo $photo->getAlternateText() ?>" style="max-height: 200px; max-width: 200px;">
+                            </a>
+                        </div>
+                        <div class="form-group">
                             <label>Caption:</label>
                             <input type="text" name="caption" class="form-control"
                                    value="<?php echo $photo->getCaption() ?? ''; ?>"><br><br>
