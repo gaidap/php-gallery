@@ -41,7 +41,7 @@
             return is_numeric($id) && !is_int($id + 0);
         }
     
-        function savePhotoFile($file, $title, $description = null): bool {
+        function savePhotoFile($file, $title): bool {
             if (!$title || !is_string($title) || empty($title)) {
                 setMessage('The photo must have a title.');
                 return false;
@@ -57,12 +57,11 @@
             $result = null;
             if ($this->moveFile($file)) {
                 $photo = PhotoFactory::createNewPhoto(
-                    $this->getTargetDir($file),
                     $this->getFileName($file),
                     $title,
                     $this->getFileType($file),
                     $this->getFileSize($file),
-                    $description
+                    $this->getFileName($file)
                 );
                 $result = $this->repo->save($photo);
             }

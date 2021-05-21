@@ -17,8 +17,8 @@
                 'title' => $title,
                 'type' => $type,
                 'size' => $size,
-                '$alternate_text' => $alternate_text,
-                '$caption' => $caption,
+                'alternate_text' => $alternate_text,
+                'caption' => $caption,
                 'description' => $description
             ]));
             

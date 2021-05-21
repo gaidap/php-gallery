@@ -1,8 +1,11 @@
 <?php require_once("includes/header.php"); ?>
 <?php
-    if (isset($_POST['submit_upload'])) {
+    $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    if (isset($post['submit_upload'])) {
         $service = new PhotoService();
-        $service->savePhotoFile($_FILES['file_upload'], $_POST['title']);
+        $service->savePhotoFile($_FILES['file_upload'], $post['title']);
+    } else {
+        unset($post);
     }
 
 ?>

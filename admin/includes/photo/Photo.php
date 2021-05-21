@@ -7,7 +7,7 @@
         
         private string $fileName;
         private string $title;
-        private string|null  $caption;
+        private string|null $caption;
         private string $alternate_text;
         private string $type;
         private int $size;
@@ -15,18 +15,18 @@
         
         function __construct() {
             $this->table = ' photos ';
-            $this->properties = array('file_name' => 's', 'title' => 's', 'caption' => 's', 'alternate_text' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
+            $this->properties = array('file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'alternate_text' => 's', 'caption' => 's', 'description' => 's');
         }
-    
+        
         static function isFileSupported($file_type): bool {
             return in_array(strtoupper($file_type), self::supported_files);
         }
-    
-    
+        
+        
         function getFileName(): string {
             return $this->fileName;
         }
-    
+        
         function setFileName(string $fileName): Photo {
             $this->fileName = $fileName;
             return $this;
@@ -46,11 +46,11 @@
             return $this;
         }
         
-        function getCaption(): string|null  {
+        function getCaption(): string|null {
             return $this->caption;
         }
         
-        function setCaption(string|null  $caption): Photo {
+        function setCaption(string|null $caption): Photo {
             $this->caption = $caption;
             return $this;
         }
@@ -104,6 +104,8 @@
             return "ID: $this->id,
                     file_name: $this->fileName,
                     title: $this->title,
+                    caption: $this->caption,
+                    alternate_text: $this->alternate_text,
                     type: $this->type,
                     size: $this->size,
                     description: $this->description,
