@@ -4,19 +4,21 @@
     class PhotoFactory extends BaseFactory {
         
         static function createNewPhoto(
-            string $file,
             string $fileName,
             string $title,
             string $type,
             string $size,
+            string $alternate_text = '',
+            string $caption = null,
             string $description = null
         ): Photo {
             return self::castToPhoto(self::reconstitute([
-                'file' => $file,
                 'fileName' => $fileName,
                 'title' => $title,
                 'type' => $type,
                 'size' => $size,
+                '$alternate_text' => $alternate_text,
+                '$caption' => $caption,
                 'description' => $description
             ]));
             

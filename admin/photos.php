@@ -25,7 +25,6 @@
                             <th>Type</th>
                             <th>Size</th>
                             <th>Creation date</th>
-                            <th>Preview</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,17 +32,18 @@
                             $repo = new PhotoRepository();
                             $photos = $repo->findAll();
                             foreach ($photos as $photo) {
-                                echo "<td><a href='delete.php?id=" . $photo->getId() . "' class='btn btn-danger btn-sm' role='button'>x</a></td>\n"
+                                echo "<td><img src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText()
+                                    . "' style='max-height: 200px; max-width: 200px;'>\n"
+                                    . "<div>\n"
+                                    . "<a class='preview-btn' href='view.php?id=" . $photo->getId() . "'>View<a/>"
+                                    . "<a class='preview-btn' href='edit.php?id=" . $photo->getId() . "'>Edit<a/>"
+                                    . "<a class='preview-btn' href='delete.php?id=" . $photo->getId() . "'>Delete<a/>"
+                                    . "</div></td>\n"
                                     . "<td>" . $photo->getId() . "</td>\n"
                                     . "<td>" . $photo->getTitle() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
-                                    . "<td>" . $photo->getCreationDate() . "</td>\n"
-                                    . "<td><img src=' " . $photo->getRelativePath() . "' alt='" . $photo->getFileName()
-                                    . "' style='max-height: 100px; max-width: 100px;'>"
-                                    . "<div>"
-                                    . "<a href='view.php?id=" . $photo->getId() . "'>View<a/>"
-                                    . "</div></td>\n";
+                                    . "<td>" . $photo->getCreationDate() . "</td>\n";
                             }
                         ?>
                         </tbody>

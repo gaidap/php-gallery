@@ -7,13 +7,15 @@
         
         private string $fileName;
         private string $title;
+        private string|null  $caption;
+        private string $alternate_text;
         private string $type;
         private int $size;
         private string|null $description;
         
         function __construct() {
             $this->table = ' photos ';
-            $this->properties = array('file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
+            $this->properties = array('file_name' => 's', 'title' => 's', 'caption' => 's', 'alternate_text' => 's', 'type' => 's', 'size' => 'i', 'description' => 's');
         }
     
         static function isFileSupported($file_type): bool {
@@ -41,6 +43,24 @@
         
         function setTitle(string $title): Photo {
             $this->title = $title;
+            return $this;
+        }
+        
+        function getCaption(): string|null  {
+            return $this->caption;
+        }
+        
+        function setCaption(string|null  $caption): Photo {
+            $this->caption = $caption;
+            return $this;
+        }
+        
+        function getAlternateText(): string {
+            return $this->alternate_text;
+        }
+        
+        function setAlternateText(string $alternate_text): Photo {
+            $this->alternate_text = $alternate_text;
             return $this;
         }
         

@@ -22,7 +22,7 @@
                 </h1>
                 <div class="col-md-6">
                     <img src="<?php echo $photo?->getRelativePath() ?? 'NO FILE'; ?>"
-                         alt="<?php echo $photo?->getFileName() ?? 'NO FILE'; ?>">
+                         alt="<?php echo $photo?->getAlternateText() ?? 'NO FILE'; ?>">
                     <a href="photos.php" class="btn btn-primary" role="button">Back to photos</a>
                 </div>
             </div>
