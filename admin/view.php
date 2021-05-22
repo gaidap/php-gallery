@@ -21,9 +21,10 @@
                     Photo view
                 </h1>
                 <div class="col-md-6">
-                    <img src="<?php echo $photo?->getRelativePath() ?? 'NO FILE'; ?>"
+                    <img class="img-view" src="<?php echo $photo?->getRelativePath() ?? 'NO FILE'; ?>"
                          alt="<?php echo $photo?->getAlternateText() ?? 'NO FILE'; ?>">
-                    <a href="photos.php" class="btn btn-primary" role="button">Back to photos</a>
+                    <a href="photos.php" class="btn btn-primary nav-btn" role="button">Back to photos</a>
+                    <a href="edit.php?id=<?php echo $photo->getId(); ?>" class="btn btn-primary nav-btn" role="button">Back to edit</a>
                 </div>
             </div>
         </div>

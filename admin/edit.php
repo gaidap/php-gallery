@@ -36,28 +36,28 @@
                 <form action="edit.php" method="post">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" name="title" class="form-control"
+                            <label for="title">Title:</label>
+                            <input id="title" type="text" name="title" class="form-control"
                                    value="<?php echo $photo->getTitle(); ?>"><br><br>
                         </div>
                         <div class="form-group">
                             <a class="thumbnail" href="view.php?id=<?php echo $photo->getId(); ?>">
-                                <img src="<?php echo $photo->getRelativePath() ?>" alt="<?php echo $photo->getAlternateText() ?>" style="max-height: 200px; max-width: 200px;">
+                                <img class="admin-photo-thumbnail-edit" src="<?php echo $photo->getRelativePath() ?>" alt="<?php echo $photo->getAlternateText() ?>">
                             </a>
                         </div>
                         <div class="form-group">
-                            <label>Caption:</label>
-                            <input type="text" name="caption" class="form-control"
+                            <label for="caption">Caption:</label>
+                            <input id="caption" type="text" name="caption" class="form-control"
                                    value="<?php echo $photo->getCaption() ?? ''; ?>"><br><br>
                         </div>
                         <div class="form-group">
-                            <label>Alternate text:</label>
-                            <input type="text" name="alternate-text" class="form-control"
+                            <label for="alternate-text">Alternate text:</label>
+                            <input id="alternate-text" type="text" name="alternate-text" class="form-control"
                                    value="<?php echo $photo->getAlternateText(); ?>"><br><br>
                         </div>
                         <div class="form-group">
-                            <label>Description:</label>
-                            <textarea name="description" class="form-control" cols="30" rows="10">
+                            <label for="summernote">Description:</label>
+                            <textarea id="summernote" name="description" class="form-control" cols="30" rows="10">
                                 <?php echo $photo->getDescription() ?? ''; ?>
                             </textarea><br><br>
                         </div>

@@ -32,13 +32,13 @@
                             $repo = new PhotoRepository();
                             $photos = $repo->findAll();
                             foreach ($photos as $photo) {
-                                echo "<td><img src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText()
-                                    . "' style='max-height: 200px; max-width: 200px;'>\n"
+                                echo "<td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
                                     . "<div>\n"
-                                    . "<a class='preview-btn' href='view.php?id=" . $photo->getId() . "'>View<a/>"
-                                    . "<a class='preview-btn' href='edit.php?id=" . $photo->getId() . "'>Edit<a/>"
-                                    . "<a class='preview-btn' href='delete.php?id=" . $photo->getId() . "'>Delete<a/>"
-                                    . "</div></td>\n"
+                                    . "<a class='preview-btn' href='view.php?id=" . $photo->getId() . "'>View</a>"
+                                    . "<a class='preview-btn' href='edit.php?id=" . $photo->getId() . "'>Edit</a>"
+                                    . "<a class='preview-btn' href='delete.php?id=" . $photo->getId() . "'>Delete</a>"
+                                    . "</div>\n"
+                                    . "</td>\n"
                                     . "<td>" . $photo->getId() . "</td>\n"
                                     . "<td>" . $photo->getTitle() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"

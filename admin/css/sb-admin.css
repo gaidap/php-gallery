@@ -227,6 +227,31 @@ ul.alert-dropdown {
     padding-left: 5px;
 }
 
+.nav-btn {
+    margin: 10px;
+}
+
+.img-view {
+    max-height: 150%;
+    max-width: 150%;
+    border-radius: 5px;
+    box-shadow: 6px 6px 3px grey;
+}
+
+.admin-photo-thumbnail-list {
+    max-height: 200px;
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 6px 6px 3px grey;
+}
+
+.admin-photo-thumbnail-edit {
+    max-height: 500px;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 6px 6px 3px grey;
+}
+
 .photo-info-box {
 
     border: 1px solid #e5e5e5;
