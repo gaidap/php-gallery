@@ -4,8 +4,6 @@
     if (isset($post['submit_upload'])) {
         $service = new PhotoService();
         $service->savePhotoFile($_FILES['file_upload'], $post['title']);
-    } else {
-        unset($post);
     }
 
 ?>

@@ -9,24 +9,12 @@
     }
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($post['update']) && isset($post['photo_id'])) {
-        $photo = PhotoFactory::castToPhoto($repo->findById($post['photo_id']));
-        if (!$post['title'] || !is_string($post['title']) || empty($post['title'])) {
-            setMessage('The photo must have a title.');
+        $service = new PhotoService();
+        if ($service->updatePhoto($post)) {
+            redirect('photos.php');
+        } else {
             redirect('edit.php?id=' . $photo->getId());
-            return false;
         }
-        if (!$post['alternate-text'] || !is_string($post['alternate-text']) || empty($post['alternate-text'])) {
-            setMessage('The photo must have an alternate text.');
-            redirect('edit.php?id=' . $photo->getId());
-            return false;
-        }
-        $photo->setTitle($post['title'])
-            ->setAlternateText(empty($post['alternate-text']) ? '' : $post['alternate-text'])
-            ->setCaption(empty($post['caption']) ? null : $post['caption'])
-            ->setDescription(empty($post['description']) ? null : $post['description']);
-        $repo->save($photo);
-    } else {
-        unset($post);
     }
 ?>
 <!-- Navigation -->

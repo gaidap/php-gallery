@@ -1,13 +1,13 @@
 <?php
     
     class PhotoService {
-    
+        
         private PhotoRepository $repo;
-    
+        
         function __construct() {
             $this->repo = new PhotoRepository();
         }
-    
+        
         private const upload_errors = [
             UPLOAD_ERR_INI_SIZE => "Selected file exceeds the maximal upload file size directive in php.ini.",
             UPLOAD_ERR_FORM_SIZE => "Selected file exceeds the maximal upload file size directive in the HTML form.",
@@ -17,7 +17,7 @@
             UPLOAD_ERR_CANT_WRITE => "IO error. Cannot write to disk.",
             UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload.",
         ];
-    
+        
         function deletePhotoFile($id): bool|string {
             if ($this->isIdValid($id)) {
                 setMessage("ID must be a valid int.");
@@ -36,11 +36,36 @@
             }
             return $delete_result;
         }
-    
+        
         private function isIdValid($id): bool {
             return is_numeric($id) && !is_int($id + 0);
         }
-    
+        
+        function updatePhoto($post): bool {
+            $photo = PhotoFactory::castToPhoto($this->repo->findById($post['photo_id']));
+            if (!$post['title'] || !is_string($post['title']) || empty($post['title'])) {
+                setMessage('The photo must have a title.');
+                redirect('edit.php?id=' . $photo->getId());
+                return false;
+            }
+            if (!$post['alternate-text'] || !is_string($post['alternate-text']) || empty($post['alternate-text'])) {
+                setMessage('The photo must have an alternate text.');
+                redirect('edit.php?id=' . $photo->getId());
+                return false;
+            }
+            $photo->setTitle($post['title'])
+                ->setAlternateText(empty($post['alternate-text']) ? '' : $post['alternate-text'])
+                ->setCaption(empty($post['caption']) ? null : $post['caption'])
+                ->setDescription(empty($post['description']) ? null : $post['description']);
+            $result = $this->repo->save($photo);
+            if (is_string($result)) {
+                setMessage($result);
+                redirect('edit.php?id=' . $photo->getId());
+                return false;
+            }
+            return true;
+        }
+        
         function savePhotoFile($file, $title): bool {
             if (!$title || !is_string($title) || empty($title)) {
                 setMessage('The photo must have a title.');

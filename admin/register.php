@@ -10,8 +10,6 @@
         } else {
             redirect("login.php");
         }
-    } else {
-        unset($post);
     }
 ?>
 <div id="page-wrapper">

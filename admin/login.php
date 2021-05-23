@@ -7,8 +7,6 @@
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($post['submit'])) {
         Session::getInstance()->signIn($post['username'], $post['password']);
-    } else {
-        unset($post);
     }
 ?>
 

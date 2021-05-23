@@ -16,5 +16,6 @@
     require_once("user/User.php");
     require_once("user/UserFactory.php");
     require_once("user/UserRepository.php");
+    require_once("user/UserService.php");
     require_once("session/Session.php");
     $session = Session::getInstance();
