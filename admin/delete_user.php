@@ -1,8 +1,17 @@
 <?php require_once("includes/header.php"); ?>
 <?php
     if (isset($_GET['id'])) {
-        $service = new PhotoService();
-        $service->deletePhotoFile($_GET['id']);
+        $repo = new UserRepository();
+        $user = $repo->findById($_GET['id']);
+        if (!$user) {
+            setMessage('User not exists.');
+        }
+        $result = $repo->delete($user);
+        if (is_string($result)) {
+            setMessage($result);
+        } else {
+            setMessage('User deleted successful.');
+        }
     }
 ?>
 <!-- Navigation -->
@@ -17,7 +26,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Delete Photo
+                    Delete User
                 </h1>
                 <div class="col-md-6">
                     <?php
@@ -25,7 +34,7 @@
                             echo "<div><pre>" . showMessage() . "</pre></div>";
                         }
                     ?>
-                    <a href="photos.php" class="btn btn-primary" role="button">Back to photos</a>
+                    <a href="users.php" class="btn btn-primary" role="button">Back to users</a>
                 </div>
             </div>
         </div>

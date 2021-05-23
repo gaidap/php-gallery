@@ -223,6 +223,10 @@ ul.alert-dropdown {
     color: #df8a13;
 }
 
+.preview-btn-wrapper {
+    margin-top: 5px;
+}
+
 .preview-btn {
     padding-left: 5px;
 }

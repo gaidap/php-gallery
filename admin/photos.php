@@ -32,8 +32,8 @@
                             $repo = new PhotoRepository();
                             $photos = $repo->findAll();
                             foreach ($photos as $photo) {
-                                echo "<td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
-                                    . "<div>\n"
+                                echo "<tr><td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
+                                    . "<div class='preview-btn-wrapper'>\n"
                                     . "<a class='preview-btn' href='view.php?id=" . $photo->getId() . "'>View</a>"
                                     . "<a class='preview-btn' href='edit.php?id=" . $photo->getId() . "'>Edit</a>"
                                     . "<a class='preview-btn' href='delete.php?id=" . $photo->getId() . "'>Delete</a>"
@@ -43,7 +43,7 @@
                                     . "<td>" . $photo->getTitle() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
-                                    . "<td>" . $photo->getCreationDate() . "</td>\n";
+                                    . "<td>" . $photo->getCreationDate() . "</td></tr>\n";
                             }
                         ?>
                         </tbody>

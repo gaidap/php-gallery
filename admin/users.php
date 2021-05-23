@@ -31,23 +31,24 @@
                             $repo = new UserRepository();
                             $users = $repo->findAll();
                             foreach ($users as $user) {
-                                echo "<td>" . $user->getId() . "</td>\n"
-                                    . "<td>" . $user->getUsername() . "</td>\n"
-                                    . "<td>" . $user->getFirstName() . "</td>\n"
-                                    . "<td>" . $user->getLastName() . "</td>\n"
-                                    . "<td>" . $user->getCreationDate() . "</td>\n";
+                                $id = $user->getId();
+                                echo "<tr><td><a href='edit_user.php?id=" . $id . "'>" . $id . "</a></td>\n"
+                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getUsername() . "</a></td>\n"
+                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getFirstName() . "</a></td>\n"
+                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getLastName() . "</a></td>\n"
+                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getCreationDate() . "</a></td></tr>\n";
                             }
                         ?>
                         </tbody>
                     </table> <!--End of Table-->
                 </div>
             </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.container-fluid -->
+        <!-- /.row -->
 
     </div>
-    <!-- /#page-wrapper -->
-    
-    <?php require_once("includes/footer.php"); ?>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+
+<?php require_once("includes/footer.php"); ?>

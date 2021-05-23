@@ -26,6 +26,10 @@
             return $this->password === hash('sha256', $password);
         }
         
+        function changePassword($password): void {
+            $this->password = hash('sha256', $password);
+        }
+        
         public function getPassword(): string {
             return $this->password;
         }

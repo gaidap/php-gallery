@@ -33,9 +33,8 @@
 
         <div class="form-group">
             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
-
+            <a href="register.php" class="btn btn-primary">Register</a>
         </div>
-
 
     </form>
 

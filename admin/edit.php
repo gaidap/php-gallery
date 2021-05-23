@@ -10,6 +10,16 @@
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     if (isset($post['update']) && isset($post['photo_id'])) {
         $photo = PhotoFactory::castToPhoto($repo->findById($post['photo_id']));
+        if (!$post['title'] || !is_string($post['title']) || empty($post['title'])) {
+            setMessage('The photo must have a title.');
+            redirect('edit.php?id=' . $photo->getId());
+            return false;
+        }
+        if (!$post['alternate-text'] || !is_string($post['alternate-text']) || empty($post['alternate-text'])) {
+            setMessage('The photo must have an alternate text.');
+            redirect('edit.php?id=' . $photo->getId());
+            return false;
+        }
         $photo->setTitle($post['title'])
             ->setAlternateText(empty($post['alternate-text']) ? '' : $post['alternate-text'])
             ->setCaption(empty($post['caption']) ? null : $post['caption'])
@@ -35,6 +45,11 @@
                 </h1>
                 <form action="edit.php" method="post">
                     <div class="col-md-6">
+                        <?php
+                            if (isMessageSet()) {
+                                echo "<div><pre>" . showMessage() . "</pre></div>";
+                            }
+                        ?>
                         <div class="form-group">
                             <label for="title">Title:</label>
                             <input id="title" type="text" name="title" class="form-control"
@@ -42,7 +57,8 @@
                         </div>
                         <div class="form-group">
                             <a class="thumbnail" href="view.php?id=<?php echo $photo->getId(); ?>">
-                                <img class="admin-photo-thumbnail-edit" src="<?php echo $photo->getRelativePath() ?>" alt="<?php echo $photo->getAlternateText() ?>">
+                                <img class="admin-photo-thumbnail-edit" src="<?php echo $photo->getRelativePath() ?>"
+                                     alt="<?php echo $photo->getAlternateText() ?>">
                             </a>
                         </div>
                         <div class="form-group">
