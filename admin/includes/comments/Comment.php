@@ -47,7 +47,7 @@
         }
         
         static function getTableName(): string {
-            return (new User())->getTable();
+            return (new Comment())->getTable();
         }
         
         function __toString(): string {

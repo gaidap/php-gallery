@@ -3,7 +3,7 @@
     
     class CommentFactory extends BaseFactory {
         
-        static function createComment(
+        static function createNewComment(
             int $photo_id,
             string $author,
             string $body
