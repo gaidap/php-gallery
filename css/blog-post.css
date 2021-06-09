@@ -11,3 +11,11 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.photo-thumbnail-post {
+    max-height: 50%;
+    max-width: 50%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 6px 6px 3px grey;
+}

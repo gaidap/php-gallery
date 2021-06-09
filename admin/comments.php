@@ -31,11 +31,11 @@
                             $comments = $repo->findAll();
                             foreach ($comments as $comment) {
                                 $id = $comment->getId();
-                                echo "<tr><td><a href='edit_user.php?id=" . $id . "'>" . $id . "</a></td>\n"
-                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $comment->getPhotoId() . "</a></td>\n"
-                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $comment->getAuthor() . "</a></td>\n"
-                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $comment->getBody() . "</a></td>\n"
-                                    . "<td><a href='edit_user.php?id=" . $id . "'>" . $comment->getCreationDate() . "</a></td></tr>\n";
+                                echo "<tr><td><a href='edit_comment.php?id=" . $id . "'>" . $id . "</a></td>\n"
+                                    . "<td><a href='edit_comment.php?id=" . $id . "'>" . $comment->getPhotoId() . "</a></td>\n"
+                                    . "<td><a href='edit_comment.php?id=" . $id . "'>" . $comment->getAuthor() . "</a></td>\n"
+                                    . "<td><a href='edit_comment.php?id=" . $id . "'>" . $comment->getBody() . "</a></td>\n"
+                                    . "<td><a href='edit_comment.php?id=" . $id . "'>" . $comment->getCreationDate() . "</a></td></tr>\n";
                             }
                         ?>
                         </tbody>

@@ -21,4 +21,5 @@
     require_once("user/UserRepository.php");
     require_once("user/UserService.php");
     require_once("session/Session.php");
+    require_once("util/StringUtils.php");
     $session = Session::getInstance();

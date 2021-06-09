@@ -1,11 +1,12 @@
 -- auto-generated definition
 create table comments
 (
-    id       int auto_increment
+    id            int auto_increment
         primary key,
-    photo_id int          not null,
-    author   varchar(255) not null,
-    body     text         null,
+    photo_id      int                                   not null,
+    author        varchar(255)                          not null,
+    body          text                                  null,
+    creation_date timestamp default current_timestamp() not null,
     constraint comments_photos__fk
         foreign key (photo_id) references photos (id)
             on update cascade on delete cascade
