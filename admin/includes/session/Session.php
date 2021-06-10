@@ -42,6 +42,20 @@
             return isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'];
         }
         
+        function countActivity(): int {
+            if (isset($_SESSION['count'])) {
+                return $_SESSION['count'] += 1;
+            }
+            return $_SESSION['count'] = 1;
+        }
+        
+        function getCurrentActivityCount(): int {
+            if (isset($_SESSION['count'])) {
+                return $_SESSION['count'];
+            }
+            return 0;
+        }
+        
         function getUsername() {
             if (isset($_SESSION['user_data']) && isset($_SESSION['user_data']['username'])) {
                 return $_SESSION['user_data']['username'];
@@ -60,6 +74,7 @@
         private function startSession(): void {
             if ($this->session_state === self::SESSION_NOT_STARTED) {
                 $this->session_state = session_start();
+                $this->countActivity();
             }
             
         }

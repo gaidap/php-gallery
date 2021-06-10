@@ -85,6 +85,14 @@
             return static::getFactoryClass()::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
         }
         
+        function countAll(): int {
+            $result = $this->executeQuery('SELECT count(*) FROM' . static::getTableName());
+            if ($this->isResultEmpty($result)) {
+                return 0;
+            }
+            return $result->fetch_row()[0];
+        }
+        
         function findById($id): ?BaseEntity {
             $stmt = $this->prepareStatement('SELECT * FROM' . static::getTableName() . 'WHERE id = ?');
             $stmt->bind_param('i', $id);
@@ -101,8 +109,8 @@
         protected function isResultEmpty(mysqli_result|bool $result): bool {
             return !$result || $result->num_rows === 0;
         }
-    
-        abstract protected function getTableName (): string;
         
-        abstract protected function getFactoryClass (): BaseFactory;
+        abstract protected function getTableName(): string;
+        
+        abstract protected function getFactoryClass(): BaseFactory;
     }
