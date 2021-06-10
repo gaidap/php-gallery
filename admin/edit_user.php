@@ -8,7 +8,7 @@
         redirect('users.php');
     }
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['update']) && isset($post['user_id'])) {
+    if (isset($post['update']) && isset($post['user-id'])) {
         $service = new UserService();
         if ($service->updateUser($post)) {
             redirect('users.php');
@@ -93,7 +93,7 @@
                                     <div class="info-box-update pull-right ">
                                         <input type="submit" name="update" value="Update"
                                                class="btn btn-primary btn-lg ">
-                                        <input type="hidden" name="user_id" value="<?php echo $user->getId() ?>"/>
+                                        <input type="hidden" name="user-id" value="<?php echo $user->getId() ?>"/>
                                     </div>
                                 </div>
                             </div>

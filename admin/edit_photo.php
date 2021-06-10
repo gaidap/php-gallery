@@ -8,12 +8,12 @@
         redirect('photos.php');
     }
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['update']) && isset($post['photo_id'])) {
+    if (isset($post['update']) && isset($post['photo-id'])) {
         $service = new PhotoService();
         if ($service->updatePhoto($post)) {
             redirect('photos.php');
         } else {
-            redirect('edit.php?id=' . $photo->getId());
+            redirect('edit_photo.php?id=' . $photo->getId());
         }
     }
 ?>
@@ -31,7 +31,7 @@
                 <h1 class="page-header">
                     Edit Photo
                 </h1>
-                <form action="edit.php" method="post">
+                <form action="edit_photo.php" method="post">
                     <div class="col-md-6">
                         <?php
                             if (isMessageSet()) {
@@ -44,7 +44,7 @@
                                    value="<?php echo $photo->getTitle(); ?>"><br><br>
                         </div>
                         <div class="form-group">
-                            <a class="thumbnail" href="view.php?id=<?php echo $photo->getId(); ?>">
+                            <a class="thumbnail" href="..\photo.php?id=<?php echo $photo->getId(); ?>">
                                 <img class="admin-photo-thumbnail-edit" src="<?php echo $photo->getRelativePath() ?>"
                                      alt="<?php echo $photo->getAlternateText() ?>">
                             </a>
@@ -95,13 +95,13 @@
                                 </div>
                                 <div class="info-box-footer clearfix">
                                     <div class="info-box-delete pull-left">
-                                        <a href="delete.php?id=<?php echo $photo->getId(); ?>"
+                                        <a href="delete_photo.php?id=<?php echo $photo->getId(); ?>"
                                            class="btn btn-danger btn-lg ">Delete</a>
                                     </div>
                                     <div class="info-box-update pull-right ">
                                         <input type="submit" name="update" value="Update"
                                                class="btn btn-primary btn-lg ">
-                                        <input type="hidden" name="photo_id" value="<?php echo $photo->getId() ?>"/>
+                                        <input type="hidden" name="photo-id" value="<?php echo $photo->getId() ?>"/>
                                     </div>
                                 </div>
                             </div>

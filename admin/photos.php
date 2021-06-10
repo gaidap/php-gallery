@@ -34,9 +34,9 @@
                             foreach ($photos as $photo) {
                                 echo "<tr><td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
                                     . "<div class='preview-btn-wrapper'>\n"
-                                    . "<a class='preview-btn' href='view.php?id=" . $photo->getId() . "'>View</a>"
-                                    . "<a class='preview-btn' href='edit.php?id=" . $photo->getId() . "'>Edit</a>"
-                                    . "<a class='preview-btn' href='delete.php?id=" . $photo->getId() . "'>Delete</a>"
+                                    . "<a class='preview-btn' href='..\photo.php?id=" . $photo->getId() . "'>View</a>"
+                                    . "<a class='preview-btn' href='edit_photo.php?id=" . $photo->getId() . "'>Edit</a>"
+                                    . "<a class='preview-btn' href='delete_photo.php?id=" . $photo->getId() . "'>Delete</a>"
                                     . "</div>\n"
                                     . "</td>\n"
                                     . "<td>" . $photo->getId() . "</td>\n"

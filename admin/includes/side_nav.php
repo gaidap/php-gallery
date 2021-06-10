@@ -14,7 +14,7 @@
             <a href="comments.php"><i class="fa fa-fw fa-edit"></i> Comments</a>
         </li>
         <li>
-            <a href="upload.php"><i class="fa fa-fw fa-table"></i> Upload</a>
+            <a href="upload_photo.php"><i class="fa fa-fw fa-table"></i> Upload</a>
         </li>
     </ul>
 </div>

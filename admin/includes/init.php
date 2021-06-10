@@ -16,6 +16,7 @@
     require_once("comments/Comment.php");
     require_once("comments/CommentFactory.php");
     require_once("comments/CommentRepository.php");
+    require_once("comments/CommentService.php");
     require_once("user/User.php");
     require_once("user/UserFactory.php");
     require_once("user/UserRepository.php");

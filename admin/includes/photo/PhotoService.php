@@ -42,15 +42,15 @@
         }
         
         function updatePhoto($post): bool {
-            $photo = PhotoFactory::castToPhoto($this->repo->findById($post['photo_id']));
+            $photo = PhotoFactory::castToPhoto($this->repo->findById($post['photo-id']));
             if (!$post['title'] || !is_string($post['title']) || empty($post['title'])) {
                 setMessage('The photo must have a title.');
-                redirect('edit.php?id=' . $photo->getId());
+                redirect('edit_photo.php?id=' . $photo->getId());
                 return false;
             }
             if (!$post['alternate-text'] || !is_string($post['alternate-text']) || empty($post['alternate-text'])) {
                 setMessage('The photo must have an alternate text.');
-                redirect('edit.php?id=' . $photo->getId());
+                redirect('edit_photo.php?id=' . $photo->getId());
                 return false;
             }
             $photo->setTitle($post['title'])
@@ -60,7 +60,7 @@
             $result = $this->repo->save($photo);
             if (is_string($result)) {
                 setMessage($result);
-                redirect('edit.php?id=' . $photo->getId());
+                redirect('edit_photo.php?id=' . $photo->getId());
                 return false;
             }
             return true;

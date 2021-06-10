@@ -10,7 +10,7 @@
         }
         
         function updateUser($post): bool {
-            $user = UserFactory::castToUser($this->repo->findById($post['user_id']));
+            $user = UserFactory::castToUser($this->repo->findById($post['user-id']));
             if (!$post['username'] || !is_string($post['username']) || empty($post['username'])) {
                 setMessage('The user must have a username.');
                 redirect('edit_user.php?id=' . $user->getId());

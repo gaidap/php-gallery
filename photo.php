@@ -2,11 +2,20 @@
 <html lang="en">
 <?php
     require_once("admin/includes/init.php");
+    
+    $photo_repo = new PhotoRepository();
+    $photo = null;
+    if (isset($_GET['id'])) {
+        $photo = PhotoFactory::castToPhoto($photo_repo->findById($_GET['id']));
+    } else {
+        redirect('admin/photos.php');
+    }
+    
+    $comment_repo = new CommentRepository();
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['add-comment'])) {
-        $repo = new CommentRepository();
-        $comment = CommentFactory::createNewComment(23, $post['author'], $post['body']);
-        $result = $repo->save($comment);
+    if (isset($post['add-comment']) && isset($post['photo-id'])) {
+        $comment = CommentFactory::createNewComment($post['photo-id'], $post['author'], $post['body']);
+        $result = $comment_repo->save($comment);
         if (is_string($result)) {
             setMessage($result);
         }
@@ -68,23 +77,27 @@
 
 <!-- Page Content -->
 <div class="container">
-
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading"><?php echo $photo->getTitle(); ?>
+                <small><?php echo $photo->getCaption(); ?></small>
+            </h4>
+            <a class="pull-left" href="photo.php?id=<?php echo $photo->getId(); ?>">
+                <img class="media-object photo-thumbnail-post"
+                     src="<?php echo UPLOAD_FOLDER . DS . $photo->getFileName(); ?>"
+                     alt="<?php echo $photo->getAlternateText(); ?>">
+            </a>
+            <?php echo $photo->getDescription() ?? ''; ?>
+        </div>
+    </div>
     <div class="row">
-        <?php
-            $repo = new CommentRepository();
-            $comments = $repo->findAll();
-        ?>
+        <?php $comments = $comment_repo->findAllByPhotoId($photo->getId()); ?>
         <?php foreach ($comments as $comment): ?>
             <?php
-            $photo = PhotoFactory::castToPhoto((new PhotoRepository())->findById($comment->getPhotoId()));
+            
             ?>
             <hr>
             <div class="media">
-                <a class="pull-left" href="admin/view.php?id=<?php echo $photo->getId(); ?>">
-                    <img class="media-object photo-thumbnail-post"
-                         src="<?php echo UPLOAD_FOLDER . DS . $photo->getFileName(); ?>"
-                         alt="<?php echo $photo->getAlternateText(); ?>">
-                </a>
                 <div class="media-body">
                     <h4 class="media-heading"><?php echo $comment->getAuthor(); ?>
                         <small><?php echo $comment->getCreationDate(); ?></small>
@@ -104,7 +117,9 @@
                 <div class="form-group">
                     <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                 </div>
+                <a href="admin/photos.php" class="btn btn-primary" role="button">Back to photos</a>
                 <button type="submit" name="add-comment" class="btn btn-primary">Add comment</button>
+                <input type="hidden" name="photo-id" value="<?php echo $photo->getId() ?>"/>
             </form>
         </div>
         <hr>

@@ -4,9 +4,12 @@
     $comment = null;
     if (isset($_GET['id'])) {
         $comment = CommentFactory::castToComment($repo->findById($_GET['id']));
+    } else {
+        redirect('comments.php');
     }
+    
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['delete-comment'])) {
+    if (isset($post['delete-comment']) && isset($post['comment-id'])) {
         $comment = CommentFactory::castToComment($repo->findById($post['comment-id']));
         $result = $repo->delete($comment);
         if (is_string($result)) {
@@ -15,15 +18,12 @@
             redirect("comments.php");
         }
     }
-    if (isset($post['update-comment'])) {
-        $comment = CommentFactory::castToComment($repo->findById($post['comment-id']));
-        $comment->setAuthor($post['author']);
-        $comment->setBody($post['body']);
-        $result = $repo->save($comment);
-        if (is_string($result)) {
-            setMessage($result);
+    if (isset($post['update-comment']) && isset($post['comment-id'])) {
+        $service = new CommentService();
+        if ($service->updateComment($post)) {
+            redirect('comments.php');
         } else {
-            redirect("comments.php");
+            redirect('edit_comment.php?id=' . $comment->getId());
         }
     }
 ?>

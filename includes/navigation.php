@@ -16,9 +16,6 @@
                     <li>
                         <a href="admin">Admin</a>
                     </li>
-                    <li>
-                        <a href="photo.php">Photo</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

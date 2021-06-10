@@ -22,7 +22,7 @@
                     Upload Section
                 </h1>
                 <div class="col-md-6">
-                    <form action="upload.php" enctype="multipart/form-data" method="post">
+                    <form action="upload_photo.php" enctype="multipart/form-data" method="post">
                         <div class="form-group">
                             <?php
                                 if (isMessageSet()) {
