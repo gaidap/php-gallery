@@ -96,10 +96,10 @@
                                 <div class="info-box-footer clearfix">
                                     <div class="info-box-delete pull-left">
                                         <a href="delete_photo.php?id=<?php echo $photo->getId(); ?>"
-                                           class="btn btn-danger btn-lg ">Delete</a>
+                                           class="btn btn-danger btn-lg ">Delete photo</a>
                                     </div>
                                     <div class="info-box-update pull-right ">
-                                        <input type="submit" name="update" value="Update"
+                                        <input type="submit" name="update" value="Update photo"
                                                class="btn btn-primary btn-lg ">
                                         <input type="hidden" name="photo-id" value="<?php echo $photo->getId() ?>"/>
                                     </div>

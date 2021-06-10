@@ -25,6 +25,7 @@
                             <th>Type</th>
                             <th>Size</th>
                             <th>Creation date</th>
+                            <th>Comments</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,7 +34,7 @@
                             $photos = $repo->findAll();
                             foreach ($photos as $photo) {
                                 echo "<tr><td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
-                                    . "<div class='preview-btn-wrapper'>\n"
+                                    . "<div class='list-action-btn-wrapper'>\n"
                                     . "<a class='preview-btn' href='..\photo.php?id=" . $photo->getId() . "'>View</a>"
                                     . "<a class='preview-btn' href='edit_photo.php?id=" . $photo->getId() . "'>Edit</a>"
                                     . "<a class='preview-btn' href='delete_photo.php?id=" . $photo->getId() . "'>Delete</a>"
@@ -43,7 +44,11 @@
                                     . "<td>" . $photo->getTitle() . "</td>\n"
                                     . "<td>" . $photo->getType() . "</td>\n"
                                     . "<td>" . $photo->getSize() . "</td>\n"
-                                    . "<td>" . $photo->getCreationDate() . "</td></tr>\n";
+                                    . "<td>" . $photo->getCreationDate() . "</td>\n"
+                                    . "<td><a href='comments.php?id=" . $photo->getId() . "'>"
+                                    . (new CommentRepository())->countByPhotoId($photo->getId())
+                                    . "</a></td>\n"
+                                    . "</tr>\n";
                             }
                         ?>
                         </tbody>

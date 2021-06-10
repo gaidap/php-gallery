@@ -43,7 +43,11 @@
                             <label for="password">Password:</label>
                             <input type="password" id="password" name="password" class="form-control">
                         </div>
-                        <a href="login.php" class="btn btn-primary" role="button">Back to login</a>
+                        <?php if (Session::getInstance()->isSignedIn()): ?>
+                            <a href="users.php" class="btn btn-primary" role="button">Back to users</a>
+                        <?php else: ?>
+                            <a href="login.php" class="btn btn-primary" role="button">Back to login</a>
+                        <?php endif; ?>
                         <input type="submit" name="register" value="Register"
                                class="btn btn-primary">
                     </div>

@@ -88,10 +88,10 @@
                                 <div class="info-box-footer clearfix">
                                     <div class="info-box-delete pull-left">
                                         <a href="delete_user.php?id=<?php echo $user->getId(); ?>"
-                                           class="btn btn-danger btn-lg ">Delete</a>
+                                           class="btn btn-danger btn-lg ">Delete user</a>
                                     </div>
                                     <div class="info-box-update pull-right ">
-                                        <input type="submit" name="update" value="Update"
+                                        <input type="submit" name="update" value="Update user"
                                                class="btn btn-primary btn-lg ">
                                         <input type="hidden" name="user-id" value="<?php echo $user->getId() ?>"/>
                                     </div>

@@ -9,15 +9,6 @@
     }
     
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    if (isset($post['delete-comment']) && isset($post['comment-id'])) {
-        $comment = CommentFactory::castToComment($repo->findById($post['comment-id']));
-        $result = $repo->delete($comment);
-        if (is_string($result)) {
-            setMessage($result);
-        } else {
-            redirect("comments.php");
-        }
-    }
     if (isset($post['update-comment']) && isset($post['comment-id'])) {
         $service = new CommentService();
         if ($service->updateComment($post)) {
@@ -61,8 +52,8 @@
                         <a href="comments.php" class="btn btn-primary" role="button">Back to comments</a>
                         <input type="submit" name="update-comment" value="Update comment"
                                class="btn btn-primary">
-                        <input type="submit" name="delete-comment" value="Delete comment"
-                               class="btn btn-danger">
+                        <a href="delete_comment.php?id=<?php echo $comment->getId(); ?>" class="btn btn-danger"
+                           role="button">Delete comment</a>
                         <input type="hidden" name="comment-id" value="<?php echo $comment->getId(); ?>"/>
                     </div>
                 </form>

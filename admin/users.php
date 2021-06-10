@@ -32,7 +32,12 @@
                             $users = $repo->findAll();
                             foreach ($users as $user) {
                                 $id = $user->getId();
-                                echo "<tr><td><a href='edit_user.php?id=" . $id . "'>" . $id . "</a></td>\n"
+                                echo "<tr><td>"
+                                    . "<a href='edit_user.php?id=" . $id . "'>" . $id . "</a>"
+                                    . "<div class='list-action-btn-wrapper'>\n"
+                                    . "<a class='preview-btn' href='delete_user.php?id=" . $user->getId() . "'>Delete</a>"
+                                    . "</div>\n"
+                                    . "</td>\n"
                                     . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getUsername() . "</a></td>\n"
                                     . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getFirstName() . "</a></td>\n"
                                     . "<td><a href='edit_user.php?id=" . $id . "'>" . $user->getLastName() . "</a></td>\n"
@@ -42,13 +47,14 @@
                         </tbody>
                     </table> <!--End of Table-->
                 </div>
+                <a href="register.php" class="btn btn-primary">Add user</a>
             </div>
-        <!-- /.row -->
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
 
     </div>
-    <!-- /.container-fluid -->
-
-</div>
-<!-- /#page-wrapper -->
-
-<?php require_once("includes/footer.php"); ?>
+    <!-- /#page-wrapper -->
+    
+    <?php require_once("includes/footer.php"); ?>
