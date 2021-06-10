@@ -49,7 +49,8 @@
                                 <?php echo $comment->getBody(); ?>
                             </textarea>
                         </div>
-                        <a href="comments.php" class="btn btn-primary" role="button">Back to comments</a>
+                        <a href="comments.php?id=<?php echo $comment->getPhotoId(); ?>" class="btn btn-primary"
+                           role="button">Back to comments</a>
                         <input type="submit" name="update-comment" value="Update comment"
                                class="btn btn-primary">
                         <a href="delete_comment.php?id=<?php echo $comment->getId(); ?>" class="btn btn-danger"
