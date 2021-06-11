@@ -85,6 +85,14 @@
             return static::getFactoryClass()::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
         }
         
+        function fetchPage(Pagination $page): array {
+            $result = $this->executeQuery('SELECT * FROM' . static::getTableName() . ' LIMIT ' . $page->getLimit() . ' OFFSET ' . $page->getOffset());
+            if ($this->isResultEmpty($result)) {
+                return [];
+            }
+            return static::getFactoryClass()::reconstituteArray($result->fetch_all(MYSQLI_ASSOC));
+        }
+        
         function countAll(): int {
             $result = $this->executeQuery('SELECT count(*) FROM' . static::getTableName());
             if ($this->isResultEmpty($result)) {

@@ -9,6 +9,7 @@
     require_once("persistence/BaseEntity.php");
     require_once("persistence/BaseFactory.php");
     require_once("persistence/BaseRepository.php");
+    require_once("persistence/Pagination.php");
     require_once("photo/Photo.php");
     require_once("photo/PhotoFactory.php");
     require_once("photo/PhotoRepository.php");
