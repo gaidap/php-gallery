@@ -11,3 +11,8 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.gallery-photo {
+    max-width: 100%;
+    max-height: 100%;
+}

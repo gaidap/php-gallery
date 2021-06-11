@@ -93,9 +93,6 @@
     <div class="row">
         <?php $comments = $comment_repo->findAllByPhotoId($photo->getId()); ?>
         <?php foreach ($comments as $comment): ?>
-            <?php
-            
-            ?>
             <hr>
             <div class="media">
                 <div class="media-body">
@@ -117,7 +114,11 @@
                 <div class="form-group">
                     <textarea name="body" class="form-control" cols="30" rows="10"></textarea>
                 </div>
-                <a href="admin/photos.php" class="btn btn-primary" role="button">Back to photos</a>
+                <?php if (Session::getInstance()->isSignedIn()): ?>
+                    <a href="admin/photos.php" class="btn btn-primary" role="button">Back to photos</a>
+                <?php else: ?>
+                    <a href="index.php" class="btn btn-primary" role="button">Back to gallery</a>
+                <?php endif; ?>
                 <button type="submit" name="add-comment" class="btn btn-primary">Add comment</button>
                 <input type="hidden" name="photo-id" value="<?php echo $photo->getId() ?>"/>
             </form>
@@ -133,7 +134,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p class="text-center">Copyright &copy; Paul Gaida 2021</p>
         </div>
     </div>
     <!-- /.row -->
