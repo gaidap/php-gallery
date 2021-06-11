@@ -86,7 +86,7 @@
         }
         
         function fetchPage(Pagination $page): array {
-            $result = $this->executeQuery('SELECT * FROM' . static::getTableName() . ' LIMIT ' . $page->getLimit() . ' OFFSET ' . $page->getOffset());
+            $result = $this->executeQuery('SELECT * FROM' . static::getTableName() . ' LIMIT ' . $page->getLimit() . ' OFFSET ' . $page->calculateOffset());
             if ($this->isResultEmpty($result)) {
                 return [];
             }

@@ -2,26 +2,36 @@
     
     
     class Pagination {
+        
+        private int $current_page;
         private int $total_count;
-        private int $offset;
         private int $limit;
         
-        function __construct($total_count = 0, $offset = 0, $limit = 4) {
+        function __construct($total_count = 0, $current_page = 1, $limit = 2) {
             $this->total_count = $total_count;
-            $this->offset = $offset;
+            $this->current_page = $current_page;
             $this->limit = $limit;
         }
         
-        function nextPage() {
-            return null;
+        function nextPage(): Pagination {
+            if ($this->hasNextPage()) {
+                $this->current_page++;
+                return new Pagination($this->total_count, $this->current_page, $this->limit);
+            }
+            return $this;
         }
         
-        function previousPage() {
-            return null;
+        function previousPage(): Pagination {
+            if ($this->hasPreviousPage()) {
+                $this->current_page--;
+                return new Pagination($this->total_count, $this->current_page, $this->limit);
+            }
+            $this->current_page = 1;
+            return $this;
         }
         
-        function getOffset(): int {
-            return $this->offset;
+        function getCurrentPage(): int {
+            return $this->current_page;
         }
         
         function getLimit(): int {
@@ -30,5 +40,21 @@
         
         function getTotalCount(): int {
             return $this->total_count;
+        }
+        
+        function calculateTotalPageCount(): int {
+            return ceil($this->total_count / $this->limit);
+        }
+        
+        function calculateOffset(): int {
+            return ($this->current_page - 1) * $this->limit;
+        }
+        
+        function hasNextPage(): bool {
+            return $this->total_count > 0 && $this->current_page < $this->calculateTotalPageCount();
+        }
+        
+        function hasPreviousPage(): bool {
+            return $this->total_count > 0 && $this->current_page > 1;
         }
     }
