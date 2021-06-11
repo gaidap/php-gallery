@@ -4,6 +4,7 @@
     class PhotoFactory extends BaseFactory {
         
         static function createNewPhoto(
+            int $user_id,
             string $fileName,
             string $title,
             string $type,
@@ -13,6 +14,7 @@
             string $description = null
         ): Photo {
             return self::castToPhoto(self::reconstitute([
+                'user_id' => $user_id,
                 'fileName' => $fileName,
                 'title' => $title,
                 'type' => $type,

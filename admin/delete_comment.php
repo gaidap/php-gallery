@@ -35,7 +35,7 @@
                             echo "<div><pre>" . showMessage() . "</pre></div>";
                         }
                     ?>
-                    <a href="comments.php?id=<?php echo $comment->getPhotoId(); ?>" class="btn btn-primary" role="button">Back
+                    <a href="comments.php?id=<?php echo $comment->getUserId(); ?>" class="btn btn-primary" role="button">Back
                         to comments</a>
                 </div>
             </div>

@@ -31,7 +31,11 @@
                         <tbody>
                         <?php
                             $repo = new PhotoRepository();
-                            $photos = $repo->findAll();
+                            $photos = [];
+                            $current_user = (new UserRepository())->findByUsername(Session::getInstance()->getUsername());
+                            if ($current_user != null) {
+                                $photos = $repo->findAllByUserId($current_user->getId());
+                            }
                             foreach ($photos as $photo) {
                                 echo "<tr><td><img class='admin-photo-thumbnail-list' src=' " . $photo->getRelativePath() . "' alt='" . $photo->getAlternateText() . "'>\n"
                                     . "<div class='list-action-btn-wrapper'>\n"

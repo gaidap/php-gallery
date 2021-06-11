@@ -80,8 +80,14 @@
                 return false;
             }
             $result = null;
+            $current_user = (new UserRepository())->findByUsername(Session::getInstance()->getUsername());
+            if (!$current_user) {
+                setMessage('User not logged in correctly.');
+                return false;
+            }
             if ($this->moveFile($file)) {
                 $photo = PhotoFactory::createNewPhoto(
+                    $current_user->getId(),
                     $this->getFileName($file),
                     $title,
                     $this->getFileType($file),

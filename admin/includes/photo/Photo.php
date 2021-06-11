@@ -5,6 +5,7 @@
         
         private const supported_files = array('JPG', 'JPEG', 'TIFF', 'PNG', 'GIF');
         
+        private int $user_id;
         private string $fileName;
         private string $title;
         private string|null $caption;
@@ -15,7 +16,16 @@
         
         function __construct() {
             $this->table = ' photos ';
-            $this->properties = array('file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'alternate_text' => 's', 'caption' => 's', 'description' => 's');
+            $this->properties = array('user_id' => 'i', 'file_name' => 's', 'title' => 's', 'type' => 's', 'size' => 'i', 'alternate_text' => 's', 'caption' => 's', 'description' => 's');
+        }
+        
+        function setUserId(int $user_id): Photo {
+            $this->user_id = $user_id;
+            return $this;
+        }
+        
+        function getUserId(): int {
+            return $this->user_id;
         }
         
         static function isFileSupported($file_type): bool {
